@@ -1,0 +1,7 @@
+aiogram~=2.12
+environs~=8.0.0
+gino
+sqlalchemy
+emoji
+fuzzywuzzy
+python-Levenshtein-wheels

@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+  db_gaming:
+    container_name: gaming_database
+    image: postgres
+    env_file:
+      - ".env"
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    restart: always
+    ports:
+      - 5433:5432
+    networks:
+      - botnet
+    volumes:
+      - ./pgdata:/var/lib/postgresql
+
+  tgbot:
+    container_name: gaming_bot
+    build:
+      context: .
+    command: python app.py
+    networks:
+      - botnet
+    restart: always
+    env_file:
+      - ".env"
+    volumes:
+      - .:/src
+    # bot start after load db
+    depends_on:
+      - db_gaming
+
+# usage nets
+networks:
+  botnet:
+    # net driver
+    driver: bridge
