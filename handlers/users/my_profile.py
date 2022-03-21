@@ -6,11 +6,10 @@ from aiogram.dispatcher.filters.builtin import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import menu_my_profile_keyboard, action_for_profile
-from loader import dp, bot
+from loader import dp, bot, db
 from utils.db_api import models
-from utils.db_api.db_commands import DBCommands, FindUsers
+from utils.db_api.db_commands import FindUsers
 
-db = DBCommands()
 find_query = FindUsers()
 
 keywords_my_profile = ['Изменить анкету', 'Edit profile', 'Главное меню', 'Main menu']

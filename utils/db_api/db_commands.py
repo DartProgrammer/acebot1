@@ -3,8 +3,6 @@ import datetime
 from aiogram import types
 from sqlalchemy import desc, or_
 
-from loader import bot, dp
-from utils.db_api.database import db
 from utils.db_api.models import User, LikeProfiles, ComplaintProfiles, Country, City, Region, SendMessageProfiles
 
 
@@ -137,15 +135,6 @@ class DBCommands:
         region_id = await Region.select('id').where(Region.name == region).gino.scalar()
         cities = await City.select('name').where(City.region_id == region_id).gino.all()
         return cities
-
-    # Проверяем состояние пользователя
-    async def check_user_state(self, user_id):
-        state = dp.current_state(chat=user_id, user=user_id)
-        state_str = str(await state.get_state())
-        if state_str == 'in_like':
-            return
-        else:
-            return user_id
 
 
 class FindUsers:

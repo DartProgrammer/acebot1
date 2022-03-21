@@ -2,10 +2,9 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-from handlers.users.start import db
 from keyboards.inline.gaming_keyboards import show_gender_keyboard, \
     get_level_of_play_keyboard, show_correct_profile_keyboard, menu_my_profile_keyboard
-from loader import dp
+from loader import dp, db
 from utils import photo_link
 from utils.db_api.models import User
 
@@ -61,7 +60,15 @@ async def get_country_just_play(message: types.Message, state: FSMContext):
     data = await state.get_data()
     language = data.get('language')
 
+    all_countries = await db.get_all_countries()
     country = message.text
+    if country not in all_countries:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
+
     await state.update_data(country=country)
 
     if language == '🇷🇺 Русский':
@@ -79,6 +86,13 @@ async def get_level_of_play(message: types.Message, state: FSMContext):
     language = data.get('language')
 
     gender = message.text
+    if gender not in ['Парень', 'Девушка', 'Guy', 'Girl']:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
+
     await state.update_data(gender=gender)
 
     if language == '🇷🇺 Русский':
@@ -97,20 +111,14 @@ async def get_cool_down(message: types.Message, state: FSMContext):
 
     play_level = message.text
 
-    try:
-        if play_level in ['Новичок', 'Средний', 'Высокий', 'Киберспорт', 'Beginner', 'Average', 'High', 'Cybersport']:
-            await state.update_data(play_level=play_level)
-
+    if play_level not in ['Новичок', 'Средний', 'Высокий', 'Киберспорт', 'Beginner', 'Average', 'High', 'Cybersport']:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
-            if language == '🇷🇺 Русский':
-                await message.answer('Выберите вариант из списка')
-            else:
-                await message.answer('Choose an option from the list')
-            return
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
-    except TypeError:
-        pass
-
+    await state.update_data(play_level=play_level)
     if language == '🇷🇺 Русский':
         await message.answer('Ваше К/Д??')
     else:
@@ -185,17 +193,14 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
     play_level = data.get('play_level')
     cool_down = data.get('cool_down')
     about_yourself = data.get('about_yourself')
-    game1 = data.get('game1')
-    game2 = data.get('game2')
-
-    if game1 is not None and game2 is not None:
+    game1 = data.get('game1', '')
+    game2 = data.get('game2', '')
+    if game1 and game2:
         games = f'{game1}, {game2}'
-    elif game2 is None:
-        games = f'{game1}'
-    elif game1 is None:
-        games = f'{game2}'
     else:
-        games = ''
+        # Мы вошли в ветку, когда одна из игр пустая строка, а может и обе, и прибавив к не пустой строке она
+        # не меняется
+        games = game1 + game2
 
     text_ru = f'Вот твой профиль:\n\n' \
               f'Возраст: <b>{age}</b>\n' \
@@ -231,26 +236,22 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
         # Проверяем, что пользователь прислал фото, а не файл
         try:
             photo = message.photo[-1]
+            link = await photo_link(photo)
+            await state.update_data(photo=link)
 
+            if language == '🇷🇺 Русский':
+                await message.answer_photo(photo=link, caption=text_ru,
+                                           reply_markup=show_correct_profile_keyboard(language))
+            else:
+                await message.answer_photo(photo=link, caption=text_en,
+                                           reply_markup=show_correct_profile_keyboard(language))
+            await state.set_state('check_profile_just_play')
         except IndexError:
             if language == '🇷🇺 Русский':
                 await message.answer('Пришлите фото, не файл!')
-                return
             else:
                 await message.answer('Send a photo, not a file!')
-                return
-
-        link = await photo_link(photo)
-        await state.update_data(photo=link)
-
-        if language == '🇷🇺 Русский':
-            await message.answer_photo(photo=link, caption=text_ru,
-                                       reply_markup=show_correct_profile_keyboard(language))
-        else:
-            await message.answer_photo(photo=link, caption=text_en,
-                                       reply_markup=show_correct_profile_keyboard(language))
-
-    await state.set_state('check_profile_just_play')
+            return
 
 
 # Если пользователь подтвердил создание профиля
@@ -268,18 +269,15 @@ async def correct_profile_just_play(message: types.Message, state: FSMContext):
     play_level = data.get('play_level')
     cool_down = data.get('cool_down')
     about_yourself = data.get('about_yourself')
-    game1 = data.get('game1')
-    game2 = data.get('game2')
+    game1 = data.get('game1', '')
+    game2 = data.get('game2', '')
     photo = data.get('photo')
-
-    if game1 is not None and game2 is not None:
+    if game1 and game2:
         games = f'{game1}, {game2}'
-    elif game2 is None:
-        games = f'{game1}'
-    elif game1 is None:
-        games = f'{game2}'
     else:
-        games = ''
+        # Мы вошли в ветку, когда одна из игр пустая строка, а может и обе, и прибавив к не пустой строке она
+        # не меняется
+        games = game1 + game2
 
     await user.update(
         game1=game1,

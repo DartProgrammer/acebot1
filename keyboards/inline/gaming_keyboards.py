@@ -4,10 +4,10 @@ from emoji import emojize
 # Клавиатура для выбора языка меню
 language_keyboard = ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
 
-ru_btn = KeyboardButton(text=f'{emojize(":Russia:")} Русский')
-en_btn = KeyboardButton(text=f'{emojize(":United_Kingdom:")} English')
+ru_button = KeyboardButton(text=f'{emojize(":Russia:")} Русский')
+en_button = KeyboardButton(text=f'{emojize(":United_Kingdom:")} English')
 
-language_keyboard.add(ru_btn, en_btn)
+language_keyboard.add(ru_button, en_button)
 
 
 # Клавиатура для выбора игр
@@ -169,7 +169,6 @@ zzz_target_btn = KeyboardButton(text=f'{emojize(":zzz:")}')
 
 profile_action_like_keyboard.add(like_target_btn, zzz_target_btn)
 
-
 # Клавиатура для действий с профилем, которому вы понравились 2
 profile_action_target_keyboard = ReplyKeyboardMarkup(row_width=4, resize_keyboard=True, one_time_keyboard=True)
 
@@ -179,7 +178,6 @@ dislike_target_btn = KeyboardButton(text=f'{emojize(":thumbs_down:")}')
 zzz_target_btn = KeyboardButton(text=f'{emojize(":zzz:")}')
 
 profile_action_target_keyboard.add(like_target_btn, love_letter_target_btn, dislike_target_btn, zzz_target_btn)
-
 
 # Клавиатура при нажатии кнопки "Пожаловаться"
 complain_keyboard = ReplyKeyboardMarkup(row_width=5, resize_keyboard=True, one_time_keyboard=True)

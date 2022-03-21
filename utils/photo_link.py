@@ -13,8 +13,10 @@ async def photo_link(photo: types.photo_size.PhotoSize) -> str:
             name='file',
             value=file,
         )
+
         async with bot.session.post('https://telegra.ph/upload', data=form) as response:
             img_src = await response.json()
+            response.close()
 
     link = 'http://telegra.ph/' + img_src[0]["src"]
     return link

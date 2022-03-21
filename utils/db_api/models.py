@@ -1,6 +1,7 @@
 from sqlalchemy import (Column, Integer, String, BigInteger, Sequence, ForeignKey, TIMESTAMP, Boolean, Text)
 from sqlalchemy import sql
 
+from data.config import HOBBY_STRING_LENGTH
 from utils.db_api.database import db
 
 
@@ -25,7 +26,7 @@ class User(db.Model):
     country = Column(String(50))
     city = Column(String(50))
     about_yourself = Column(String(500))
-    hobby = Column(String(40))
+    hobby = Column(String(HOBBY_STRING_LENGTH))
     photo = Column(String(250))
     enable = Column(Boolean, default=True)
     complaint = Column(Integer, default=0)

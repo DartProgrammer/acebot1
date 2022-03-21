@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
-from handlers.users.start import db
+from loader import db
 from keyboards.inline.gaming_keyboards import show_looking_for_keyboard, menu_my_profile_keyboard, get_teammates_country
 from loader import dp
 from utils.db_api import models

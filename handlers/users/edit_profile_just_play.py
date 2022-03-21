@@ -2,9 +2,8 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-from handlers.users.start import db
-from keyboards.inline.gaming_keyboards import show_gender_keyboard, \
-    get_level_of_play_keyboard, show_correct_profile_keyboard, menu_my_profile_keyboard
+from keyboards.inline.gaming_keyboards import get_level_of_play_keyboard, show_correct_profile_keyboard, \
+    menu_my_profile_keyboard
 from loader import dp
 from utils import photo_link
 from utils.db_api import models

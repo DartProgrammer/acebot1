@@ -3,9 +3,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Command
 from emoji import emojize
 
-from handlers.users.start import db
 from keyboards.inline.gaming_keyboards import complain_keyboard, profile_action_target_keyboard
-from loader import dp, bot
+from loader import db, dp
 from utils.db_api import models
 
 

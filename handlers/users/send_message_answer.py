@@ -6,10 +6,9 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from emoji.core import emojize
 
 from handlers.users.my_profile import find_query
-from handlers.users.start import db
 from keyboards.inline.gaming_keyboards import get_send_message_keyboard, \
     complain_keyboard, profile_action_like_keyboard, action_for_profile
-from loader import dp, bot
+from loader import dp, bot, db
 from utils.db_api import models
 
 

@@ -4,10 +4,7 @@ from aiogram.dispatcher.filters.builtin import CommandStart
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import language_keyboard
-from loader import dp
-from utils.db_api.db_commands import DBCommands
-
-db = DBCommands()
+from loader import db, dp
 
 
 # Попадаем сюда, когда пользователь нажал /start или "Изменить анкету"

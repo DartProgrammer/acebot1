@@ -3,11 +3,11 @@ from aiogram.dispatcher import FSMContext, filters
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from fuzzywuzzy import process
 
-from handlers.users.my_profile import db
-from handlers.users.users_info import AgeRestriction, NumberCharacters, InsufficientAge
+from data.config import HOBBY_STRING_LENGTH
+from exceptions import *
 from keyboards.inline.gaming_keyboards import show_gender_keyboard, show_who_search_keyboard, \
     show_correct_profile_keyboard, show_looking_for_keyboard, get_teammates_country
-from loader import dp
+from loader import dp, db
 from utils import photo_link
 from utils.db_api import models
 
@@ -110,7 +110,6 @@ async def edit_profile_gender(message: types.Message, state: FSMContext):
 
     # Если пользователь выбрал "Просто поиграть"
     if purpose in ['Просто поиграть', 'Just to play']:
-
         if language == '🇷🇺 Русский':
             await message.answer('Из каких стран вы хотите, что бы были ваши тиммейты?',
                                  reply_markup=get_teammates_country(language))
@@ -123,7 +122,6 @@ async def edit_profile_gender(message: types.Message, state: FSMContext):
 
     # Если пользователь выбрал "Команду для праков"
     elif purpose in ['Команду для праков', 'A team for practitioners']:
-
         if language == '🇷🇺 Русский':
             await message.answer('Данная функция находится в стадии разработки',
                                  reply_markup=show_looking_for_keyboard(language, age))
@@ -133,13 +131,18 @@ async def edit_profile_gender(message: types.Message, state: FSMContext):
         return
 
     # Если пользователь выбрал "Человека в реальной жизни"
-    else:
+    elif purpose in ['Человека в реальной жизни', 'A person in real life']:
         if language == '🇷🇺 Русский':
             await message.answer('Кого ты ищешь?', reply_markup=show_who_search_keyboard(language))
         else:
             await message.answer('Who are you looking for?', reply_markup=show_who_search_keyboard(language))
 
         await state.set_state('edit_who_looking_for')
+    else:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
 
 
 # Узнаем страну пользователя
@@ -150,6 +153,13 @@ async def edit_profile_who_looking_for(message: types.Message, state: FSMContext
     data = await state.get_data()
     language = data.get('language')
     user: models.User = data.get('user_')
+
+    if who_search not in ['Парней', 'Девушек', 'Парней и Девушек', 'Guys', 'Girls', 'Guys and Girls']:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     if language == '🇷🇺 Русский':
         await message.answer('Из какой ты страны?', reply_markup=ReplyKeyboardMarkup(
@@ -286,6 +296,14 @@ async def get_city(message: types.Message, state: FSMContext):
     await state.update_data(region=region)
     data = await state.get_data()
     language = data.get('language')
+    country = data.get('country')
+
+    if region not in db.get_all_regions(country):
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     # Получаем список всех городов по выбранному региону
     all_cities = await db.get_all_cities(region)
@@ -312,6 +330,13 @@ async def edit_profile_city(message: types.Message, state: FSMContext):
     data = await state.get_data()
     language = data.get('language')
     user: models.User = data.get('user_')
+
+    if city not in db.get_all_cities(data.get('region')):
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     if language == '🇷🇺 Русский':
         await message.answer('Как твоё имя?', reply_markup=ReplyKeyboardMarkup(
@@ -404,19 +429,19 @@ async def edit_profile_hobby(message: types.Message, state: FSMContext):
     # Проверяем хобби пользователя на количество символов
     try:
         hobby = message.text
-        if len(hobby) > 50:
+        if len(hobby) > HOBBY_STRING_LENGTH:
             raise NumberCharacters
 
     except NumberCharacters:
         hobby = message.text
         if language == '🇷🇺 Русский':
-            await message.answer(f'Хобби имеет ограничение по количеству символов = <b>50</b>,\n '
+            await message.answer(f'Хобби имеет ограничение по количеству символов = <b>{HOBBY_STRING_LENGTH}</b>,\n '
                                  f'ваше хобби имеет количество символов = <b>{len(hobby)}</b>!\n'
                                  f'Укажите хобби покороче.')
             return
 
         else:
-            await message.answer(f'Hobby has a limit on the number of characters = <b>50</b>,\n '
+            await message.answer(f'Hobby has a limit on the number of characters = <b>{HOBBY_STRING_LENGTH}</b>,\n '
                                  f'your hobby has a number of characters = <b>{len(hobby)}</b>!\n'
                                  f'Specify a shorter hobby.')
             return
@@ -471,9 +496,9 @@ async def edit_profile_photo(message: types.Message, state: FSMContext):
     about_yourself = data.get('about_yourself')
     hobby = data.get('hobby')
     game1 = data.get('game1')
+    game2 = data.get('game2')
     if game1 is None:
         game1 = user.game1
-    game2 = data.get('game2')
     if game2 is None:
         game2 = user.game2
 

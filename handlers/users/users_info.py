@@ -3,27 +3,14 @@ from aiogram.dispatcher import FSMContext, filters
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from fuzzywuzzy import process
 
+from data.config import HOBBY_STRING_LENGTH
 from handlers.users.start import db
 from keyboards.inline.gaming_keyboards import show_gender_keyboard, show_who_search_keyboard, \
     show_correct_profile_keyboard, show_looking_for_keyboard, get_teammates_country
 from loader import dp
 from utils import photo_link
 from utils.db_api.models import User
-
-
-# Класс для отлавливания ограничений по возрасту
-class AgeRestriction(BaseException):
-    pass
-
-
-# Класс для пользователей меньше 10 лет
-class InsufficientAge(BaseException):
-    pass
-
-
-# Класс для отлавливания ограничений по количеству символов
-class NumberCharacters(BaseException):
-    pass
+from exceptions import *
 
 
 # Узнаем, кого ищет пользователь
@@ -128,13 +115,18 @@ async def enter_gender(message: types.Message, state: FSMContext):
         return
 
     # Если пользователь выбрал "Человека в реальной жизни"
-    else:
+    elif purpose in ['Человека в реальной жизни', 'A person in real life']:
         if language == '🇷🇺 Русский':
             await message.answer('Ты парень или девушка?', reply_markup=show_gender_keyboard(language))
         else:
             await message.answer('Are you a guy or a girl?', reply_markup=show_gender_keyboard(language))
 
         await state.set_state('gender')
+    else:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
 
 
 # Узнаем, кого ищет пользователь
@@ -144,6 +136,13 @@ async def get_who_search(message: types.Message, state: FSMContext):
     await state.update_data(gender=gender)
     data = await state.get_data()
     language = data.get('language')
+
+    if gender not in ['Парень', 'Девушка', 'Guy', 'Girl']:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     if language == '🇷🇺 Русский':
         await message.answer('Кого ты ищешь?', reply_markup=show_who_search_keyboard(language))
@@ -160,6 +159,13 @@ async def get_country(message: types.Message, state: FSMContext):
     await state.update_data(who_search=who_search)
     data = await state.get_data()
     language = data.get('language')
+
+    if who_search not in ['Парней', 'Девушек', 'Парней и Девушек', 'Guys', 'Girls', 'Guys and Girls']:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     if language == '🇷🇺 Русский':
         await message.answer('Из какой ты страны?', reply_markup=ReplyKeyboardRemove())
@@ -284,10 +290,19 @@ async def get_city(message: types.Message, state: FSMContext):
     await state.update_data(region=region)
     data = await state.get_data()
     language = data.get('language')
+    country = data.get('country')
+
+    all_regions = await db.get_all_regions(country)
+    all_regions = [item[0] for item in all_regions]
+    if region not in all_regions:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     # Получаем список всех городов по выбранному региону
     all_cities = await db.get_all_cities(region)
-
     cities_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 
     for city in all_cities:
@@ -309,6 +324,15 @@ async def get_name(message: types.Message, state: FSMContext):
     await state.update_data(city=city)
     data = await state.get_data()
     language = data.get('language')
+
+    all_cities = await db.get_all_cities(data.get('region'))
+    all_cities = [item[0] for item in all_cities]
+    if city not in all_cities:
+        if language == '🇷🇺 Русский':
+            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
+        else:
+            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        return
 
     if language == '🇷🇺 Русский':
         await message.answer('Как твоё имя?', reply_markup=ReplyKeyboardRemove())
@@ -393,19 +417,19 @@ async def get_photo(message: types.Message, state: FSMContext):
     # Проверяем хобби пользователя на количество символов
     try:
         hobby = message.text
-        if len(hobby) > 50:
+        if len(hobby) > HOBBY_STRING_LENGTH:
             raise NumberCharacters
 
     except NumberCharacters:
         hobby = message.text
         if language == '🇷🇺 Русский':
-            await message.answer(f'Хобби имеет ограничение по количеству символов = <b>50</b>,\n '
+            await message.answer(f'Хобби имеет ограничение по количеству символов = <b>{HOBBY_STRING_LENGTH}</b>,\n '
                                  f'ваше хобби имеет количество символов = <b>{len(hobby)}</b>!\n'
                                  f'Укажите хобби покороче.')
             return
 
         else:
-            await message.answer(f'Hobby has a limit on the number of characters = <b>50</b>,\n '
+            await message.answer(f'Hobby has a limit on the number of characters = <b>{HOBBY_STRING_LENGTH}</b>,\n '
                                  f'your hobby has a number of characters = <b>{len(hobby)}</b>!\n'
                                  f'Specify a shorter hobby.')
             return
@@ -450,17 +474,14 @@ async def add_photo(message: types.Message, state: FSMContext):
     name = data.get('name')
     about_yourself = data.get('about_yourself')
     hobby = data.get('hobby')
-    game1 = data.get('game1')
-    game2 = data.get('game2')
-
-    if game1 is not None and game2 is not None:
+    game1 = data.get('game1', '')
+    game2 = data.get('game2', '')
+    if game1 and game2:
         games = f'{game1}, {game2}'
-    elif game2 is None:
-        games = f'{game1}'
-    elif game1 is None:
-        games = f'{game2}'
     else:
-        games = ''
+        # Мы вошли в ветку, когда одна из игр пустая строка, а может и обе, и прибавив к не пустой строке она
+        # не меняется
+        games = game1 + game2
 
     text_ru = f'Вот твой профиль:\n\n' \
               f'Имя: <b>{name}</b>\n' \
