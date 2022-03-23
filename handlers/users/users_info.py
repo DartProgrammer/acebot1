@@ -8,7 +8,7 @@ from handlers.users.start import db
 from keyboards.inline.gaming_keyboards import show_gender_keyboard, show_who_search_keyboard, \
     show_correct_profile_keyboard, show_looking_for_keyboard, get_teammates_country
 from loader import dp
-from utils import photo_link
+from utils.photo_link import photo_link
 from utils.db_api.models import User
 from exceptions import *
 

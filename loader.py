@@ -10,9 +10,9 @@ bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 db = DBCommands()
-i18n = LanguageMiddleware(config.I18N_DOMAIN, config.LOCALES_PATH)
+i18n = LanguageMiddleware(config.I18N_DOMAIN, config.LOCALES_PATH, default='en')
 
 dp.middleware.setup(ThrottlingMiddleware())
 dp.middleware.setup(i18n)
 
-_ = i18n.gettext
+_ = i18n.lazy_gettext

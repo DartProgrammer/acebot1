@@ -130,3 +130,10 @@ class City(db.Model):
 
     def __repr__(self):
         return f"<City(id='{self.id}', name='{self.name}')>"
+#
+#
+# class Purpose(db.Model):
+#     __tablename__ = 'purpose'
+#
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     name = Column(String(200), nullable=False)

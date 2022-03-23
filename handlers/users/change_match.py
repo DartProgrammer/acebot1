@@ -21,10 +21,7 @@ async def profile_change_match(message: types.Message, state: FSMContext):
     text_ru = 'Кого ты ищешь?'
     text_en = 'Who are you looking for?'
 
-    if language == '🇷🇺 Русский':
-        await message.answer(text=text_ru, reply_markup=show_looking_for_keyboard(language, age))
-    else:
-        await message.answer(text=text_en, reply_markup=show_looking_for_keyboard(language, age))
+    await message.answer(text='Кого ты ищешь?', reply_markup=show_looking_for_keyboard(language, age))
 
     await state.set_state('change_match_looking_for')
 
@@ -108,6 +105,17 @@ async def edit_looking_for(message: types.Message, state: FSMContext):
                                       '2. Изменить фото\n'
                                       '3. Изменить текст анкеты\n'
                                       '4. Смотреть анкеты', reply_markup=menu_my_profile_keyboard)
+        else:
+            await message.answer('Your profile:')
+            if photo == 'None':
+                await message.answer(text=text_en)
+            else:
+                await message.answer_photo(photo=user.photo, caption=text_en)
+
+            await message.answer(text='1. Edit my profile\n'
+                                      '2. Change my photo\n'
+                                      '3. Change profile text\n'
+                                      '4. View profiles', reply_markup=menu_my_profile_keyboard)
 
         await state.set_state('my_profile_state')
 

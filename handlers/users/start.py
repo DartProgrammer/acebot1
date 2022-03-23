@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.builtin import CommandStart
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import language_keyboard
-from loader import db, dp
+from loader import db, dp, _
 
 
 # Попадаем сюда, когда пользователь нажал /start или "Изменить анкету"
@@ -18,7 +18,7 @@ async def bot_start(message: types.Message, state: FSMContext):
     await state.update_data(user_id=user_id)
     text = 'First of all I need to know which language do you speak? It’s will affect only on the menu language!\n\n' \
            'Прежде всего мне нужно знать, на каком языке вы говорите? Это повлияет только на язык меню!'
-    await message.answer(text=text, reply_markup=language_keyboard)
+    await message.answer(text=_(text), reply_markup=language_keyboard)
     await state.set_state('vote_language')
 
 

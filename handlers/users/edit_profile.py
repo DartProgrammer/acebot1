@@ -298,7 +298,9 @@ async def get_city(message: types.Message, state: FSMContext):
     language = data.get('language')
     country = data.get('country')
 
-    if region not in db.get_all_regions(country):
+    all_regions = await db.get_all_regions(country)
+    all_regions = [item[0] for item in all_regions]
+    if region not in all_regions:
         if language == '🇷🇺 Русский':
             await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
@@ -307,7 +309,6 @@ async def get_city(message: types.Message, state: FSMContext):
 
     # Получаем список всех городов по выбранному региону
     all_cities = await db.get_all_cities(region)
-
     cities_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 
     for city in all_cities:
@@ -331,7 +332,9 @@ async def edit_profile_city(message: types.Message, state: FSMContext):
     language = data.get('language')
     user: models.User = data.get('user_')
 
-    if city not in db.get_all_cities(data.get('region')):
+    all_cities = await db.get_all_cities(data.get('region'))
+    all_cities = [item[0] for item in all_cities]
+    if city not in all_cities:
         if language == '🇷🇺 Русский':
             await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
@@ -473,13 +476,13 @@ async def edit_profile_hobby(message: types.Message, state: FSMContext):
 
 
 # Отправляем пользователю его профиль для проверки
-@dp.message_handler(state='edit_photo')
+@dp.message_handler(state='edit_photo', content_types=types.ContentTypes.ANY)
 async def edit_profile_photo(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('user_')
     if message.text not in ['Оставить текущее', 'Leave the current', 'Вернуться назад', 'Go back']:
         photo = message.photo[-1]
-        link = await photo_link(photo)
+        link = await photo_link.photo_link(photo)
         await state.update_data(photo=link)
     else:
         link = user.photo
@@ -547,7 +550,7 @@ async def edit_profile_photo(message: types.Message, state: FSMContext):
 
 # Если пользователь подтвердил изменение профиля
 @dp.message_handler(filters.Text(startswith=['Да', 'Yes']), state='edit_check_profile')
-async def edit_profile_photo(message: types.Message, state: FSMContext):
+async def edit_profile_accept(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('user_')
     language = data.get('language')

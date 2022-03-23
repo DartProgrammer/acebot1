@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext, filters
 
 from keyboards.inline.gaming_keyboards import menu_my_profile_keyboard
 from loader import dp, db
-from utils import photo_link
+from utils.photo_link import photo_link
 from utils.db_api import models
 
 
