@@ -13,7 +13,7 @@ language_keyboard.add(ru_button, en_button)
 # Клавиатура для выбора игр
 def show_games_keyboard(language, game1=None, game2=None):
     games_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         continue_btn = KeyboardButton(text='Продолжить')
     else:
         continue_btn = KeyboardButton(text='Continue')
@@ -39,7 +39,7 @@ def show_games_keyboard(language, game1=None, game2=None):
 def show_looking_for_keyboard(language, age):
     looking_for_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         if 9 < age < 12:
             just_play_btn = KeyboardButton(text='Просто поиграть')
 
@@ -72,7 +72,7 @@ def show_looking_for_keyboard(language, age):
 def show_gender_keyboard(language):
     gender_keyboard = ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         guy_btn = KeyboardButton(text=f'Парень')
         girl_btn = KeyboardButton(text=f'Девушка')
     else:
@@ -88,7 +88,7 @@ def show_gender_keyboard(language):
 def show_who_search_keyboard(language):
     who_search_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         guys_btn = KeyboardButton(text='Парней')
         girls_btn = KeyboardButton(text='Девушек')
         guys_girls_btn = KeyboardButton(text='Парней и Девушек')
@@ -106,7 +106,7 @@ def show_who_search_keyboard(language):
 def show_correct_profile_keyboard(language):
     correct_profile_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         correct_btn = KeyboardButton(text='Да')
         cancel_btn = KeyboardButton(text='Изменить анкету')
     else:
@@ -188,14 +188,12 @@ not_responding_btn = KeyboardButton(text=f'{emojize(":muted_speaker:")} 3')
 other_btn = KeyboardButton(text=f'{emojize(":red_question_mark:")} 4')
 cancel_complain_btn = KeyboardButton(text=f'{emojize(":multiply:")} 5')
 
-complain_keyboard.add(adult_btn, sale_btn, not_responding_btn, other_btn, cancel_complain_btn)
-
 
 # Клавиатура для выбора страны teammates
 def get_teammates_country(language):
     teammates_country_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         cis_countries_btn = KeyboardButton(text='Страны СНГ')
         all_countries_btn = KeyboardButton(text='Все страны')
     else:
@@ -211,7 +209,7 @@ def get_teammates_country(language):
 def get_level_of_play_keyboard(language):
     level_of_play_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True, row_width=1)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         beginner_btn = KeyboardButton(text='Новичок')
         average_btn = KeyboardButton(text='Средний')
         high_btn = KeyboardButton(text='Высокий')
@@ -231,7 +229,7 @@ def get_level_of_play_keyboard(language):
 def get_send_message_keyboard(language):
     send_message_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True, row_width=2)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         answer_btn = KeyboardButton(text='Ответить')
         complain_btn = KeyboardButton(text=f'{emojize(":warning:")} Пожаловаться')
     else:

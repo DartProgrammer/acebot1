@@ -4,8 +4,9 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import get_level_of_play_keyboard, show_correct_profile_keyboard, \
     menu_my_profile_keyboard
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp
-from utils import photo_link
+from utils.photo_link import photo_link
 from utils.db_api import models
 from utils.db_api.models import User
 
@@ -24,7 +25,7 @@ async def purpose_search_handler(message: types.Message, state: FSMContext):
     else:
         await state.update_data(country='Все страны')
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Ваш уровень игры?', reply_markup=get_level_of_play_keyboard(language))
     else:
         await message.answer('Your level of play?', reply_markup=get_level_of_play_keyboard(language))
@@ -45,7 +46,7 @@ async def get_cool_down(message: types.Message, state: FSMContext):
             await state.update_data(play_level=play_level)
 
         else:
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 await message.answer('Выберите вариант из списка')
             else:
                 await message.answer('Choose an option from the list')
@@ -54,7 +55,7 @@ async def get_cool_down(message: types.Message, state: FSMContext):
     except TypeError:
         pass
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Ваше К/Д??')
     else:
         await message.answer('Your cool down?')
@@ -73,7 +74,7 @@ async def get_something_from_yourself(message: types.Message, state: FSMContext)
 
     # Если пользователь ввёл текст
     except ValueError:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Введите число')
         else:
             await message.answer('Enter an integer')
@@ -81,7 +82,7 @@ async def get_something_from_yourself(message: types.Message, state: FSMContext)
 
     await state.update_data(cool_down=cool_down)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Что-то от себя?')
     else:
         await message.answer('Something from yourself?')
@@ -97,7 +98,7 @@ async def get_photo(message: types.Message, state: FSMContext):
     about_yourself = message.text
     await state.update_data(about_yourself=about_yourself)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Пришли свое фото (не файл)',
                              reply_markup=ReplyKeyboardMarkup(keyboard=[
                                  [
@@ -165,7 +166,7 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
 
     # Если пользователь не стал отправлять фото, а нажал "Пропустить"
     if message.text in ['Пропустить', 'Skip']:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer(text=text_ru, reply_markup=show_correct_profile_keyboard(language))
         else:
             await message.answer(text=text_ru, reply_markup=show_correct_profile_keyboard(language))
@@ -177,7 +178,7 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
             photo = message.photo[-1]
 
         except IndexError:
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 await message.answer('Пришлите фото, не файл!')
                 return
             else:
@@ -187,7 +188,7 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
         link = await photo_link(photo)
         await state.update_data(photo=link)
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer_photo(photo=link, caption=text_ru,
                                        reply_markup=show_correct_profile_keyboard(language))
         else:
@@ -257,7 +258,7 @@ async def correct_profile_just_play(message: types.Message, state: FSMContext):
               f'Level of play: <b>{play_level}</b>\n' \
               f'Your cool down: <b>{cool_down}</b>'
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Профиль успешно добавлен!')
         await message.answer(text=text_ru)
         await message.answer(text='1. Заполнить анкету заново\n'

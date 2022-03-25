@@ -4,6 +4,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from emoji import emojize
 
 from keyboards.inline.gaming_keyboards import menu_my_profile_keyboard
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp
 from utils.db_api import models
 
@@ -17,7 +18,7 @@ async def disable_profile_handler(message: types.Message, state: FSMContext):
     option = message.text
 
     # Если текущий язык пользователя Русский
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
 
         # Если пользователь выбрал вариант 1 "Да, отключить анкету"
         if option == '1':

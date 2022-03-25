@@ -4,8 +4,9 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import show_gender_keyboard, \
     get_level_of_play_keyboard, show_correct_profile_keyboard, menu_my_profile_keyboard
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp, db
-from utils import photo_link
+from utils.photo_link import photo_link
 from utils.db_api.models import User
 
 
@@ -20,7 +21,7 @@ async def purpose_search_handler(message: types.Message, state: FSMContext):
     if countries in ['Страны СНГ', 'CIS countries']:
         await state.update_data(country='Россия, Белоруссия, Украина')
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Ты парень или девушка?', reply_markup=show_gender_keyboard(language))
         else:
             await message.answer('Are you a guy or a girl?', reply_markup=show_gender_keyboard(language))
@@ -39,7 +40,7 @@ async def purpose_search_handler(message: types.Message, state: FSMContext):
             country_btn = KeyboardButton(text=f'{country[0]}')
             country_keyboard.add(country_btn)
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Выберите страну из списка', reply_markup=country_keyboard)
         else:
             await message.answer('Choose a country from the list', reply_markup=country_keyboard)
@@ -48,7 +49,7 @@ async def purpose_search_handler(message: types.Message, state: FSMContext):
 
     # Если пользователь не выбрал из вариантов, а написал текст
     else:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
             await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
@@ -63,7 +64,7 @@ async def get_country_just_play(message: types.Message, state: FSMContext):
     all_countries = await db.get_all_countries()
     country = message.text
     if country not in all_countries:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
             await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
@@ -71,7 +72,7 @@ async def get_country_just_play(message: types.Message, state: FSMContext):
 
     await state.update_data(country=country)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Ты парень или девушка?', reply_markup=show_gender_keyboard(language))
     else:
         await message.answer('Are you a guy or a girl?', reply_markup=show_gender_keyboard(language))
@@ -87,7 +88,7 @@ async def get_level_of_play(message: types.Message, state: FSMContext):
 
     gender = message.text
     if gender not in ['Парень', 'Девушка', 'Guy', 'Girl']:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
             await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
@@ -95,7 +96,7 @@ async def get_level_of_play(message: types.Message, state: FSMContext):
 
     await state.update_data(gender=gender)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Ваш уровень игры?', reply_markup=get_level_of_play_keyboard(language))
     else:
         await message.answer('Your level of play?', reply_markup=get_level_of_play_keyboard(language))
@@ -112,14 +113,14 @@ async def get_cool_down(message: types.Message, state: FSMContext):
     play_level = message.text
 
     if play_level not in ['Новичок', 'Средний', 'Высокий', 'Киберспорт', 'Beginner', 'Average', 'High', 'Cybersport']:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
         else:
             await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
         return
 
     await state.update_data(play_level=play_level)
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Ваше К/Д??')
     else:
         await message.answer('Your cool down?')
@@ -138,7 +139,7 @@ async def get_something_from_yourself(message: types.Message, state: FSMContext)
 
     # Если пользователь ввёл текст
     except ValueError:
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Введите число')
         else:
             await message.answer('Enter an integer')
@@ -146,7 +147,7 @@ async def get_something_from_yourself(message: types.Message, state: FSMContext)
 
     await state.update_data(cool_down=cool_down)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Что-то от себя?')
     else:
         await message.answer('Something from yourself?')
@@ -162,7 +163,7 @@ async def get_photo(message: types.Message, state: FSMContext):
     about_yourself = message.text
     await state.update_data(about_yourself=about_yourself)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Пришли любую фотографию (не файл), если хочешь!',
                              reply_markup=ReplyKeyboardMarkup(keyboard=[
                                  [

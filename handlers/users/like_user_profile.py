@@ -3,6 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import profile_action_target_keyboard
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp, bot, db
 from utils.db_api import models
 
@@ -46,7 +47,7 @@ async def show_users_profiles(message: types.Message, state: FSMContext):
     else:
         games = ''
 
-    if language_second_user == '🇷🇺 Русский':
+    if language_second_user == ru_button.text:
         # Изменяем текст в зависимости от количества лайков
         if count_users_liked == 1:
             text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -93,7 +94,7 @@ async def not_show_users_profiles(message: types.Message, state: FSMContext):
     language = second_user.language
     await state.update_data(second_user=second_user)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         text = 'Так ты не узнаешь, что кому-то нравишься... ' \
                'Точно хочешь отключить свою анкету?\n\n' \
                '1. Да, отключить анкету.\n' \
@@ -137,7 +138,7 @@ async def like_user_profile(message: types.Message, state: FSMContext):
     language_current_profile = current_profile.language
 
     # Отправляем информацию о взаимной симпатии пользователю 2
-    if user_language == '🇷🇺 Русский':
+    if user_language == ru_button.text:
         # await message.answer(f'Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link}')
         await message.answer(f'Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link_username}',
                              disable_web_page_preview=True)
@@ -158,7 +159,7 @@ async def like_user_profile(message: types.Message, state: FSMContext):
                                            f'{current_profile.city} - {current_profile.about_yourself}')
 
     # Отправляем информацию о взаимной симпатии пользователю 1
-    if language_current_profile == '🇷🇺 Русский':
+    if language_current_profile == ru_button.text:
         # await bot.send_message(chat_id=f'{current_profile_user_id}',
         #                        text=f'Есть взаимная симпатия! Начинай общаться 👉 {user_link}')
         await bot.send_message(chat_id=f'{current_profile_user_id}',
@@ -192,7 +193,7 @@ async def like_user_profile(message: types.Message, state: FSMContext):
         else:
             games = ''
 
-        if user_language == '🇷🇺 Русский':
+        if user_language == ru_button.text:
             # Изменяем текст в зависимости от количества лайков
             if count_users_liked_for_text == 1:
                 text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -233,7 +234,7 @@ async def like_user_profile(message: types.Message, state: FSMContext):
 
     # Сюда попадаем, когда показали всех пользователей, которым понравилась анкета
     else:
-        if user_language == '🇷🇺 Русский':
+        if user_language == ru_button.text:
             await message.answer(f'Чтобы получать больше лайков ❤️\n'
                                  f'Подпишись на канал Ссылка на канал✅',
                                  reply_markup=ReplyKeyboardMarkup(keyboard=[

@@ -5,6 +5,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from keyboards.inline.gaming_keyboards import profile_action_target_keyboard, menu_my_profile_keyboard
 from loader import dp, db
 from utils.db_api import models
+from keyboards.inline.gaming_keyboards import ru_button
 
 
 # Сюда попадаем, когда пользователь нажал "zzz"
@@ -43,7 +44,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
         else:
             games = ''
 
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
             # Изменяем текст в зависимости от количества лайков
             if count_users_liked == 1:
                 text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -98,7 +99,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
             games = ''
 
         # Если текущий язык пользователя Русский
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
 
             text_ru = f'Имя: <b>{second_user.name}</b>\n' \
                       f'Возраст: <b>{second_user.age}</b>\n' \
@@ -154,7 +155,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
     # Если пользователь выбрал вариант 3 "Я больше не хочу никого искать"
     elif option == '3':
         # Если текущий язык пользователя Русский
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
             text_ru = 'Так ты не узнаешь, что кому-то нравишься... Точно хочешь отключить свою анкету?\n\n' \
                       '1. Да, отключить анкету.\n' \
                       '2. Нет, вернуться назад.'
@@ -185,7 +186,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
     # Если пользователь не выбрал вариант, а что-то написал
     else:
         # Если текущий язык пользователя Русский
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
             await message.answer('Нет такого варианта ответа')
 
         # Если текущий язык пользователя Английский
@@ -230,7 +231,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
         else:
             games = ''
 
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
             # Изменяем текст в зависимости от количества лайков
             if count_users_send_message == 1:
                 text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -289,7 +290,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
             games = ''
 
         # Если текущий язык пользователя Русский
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
 
             text_ru = f'Имя: <b>{second_user.name}</b>\n' \
                       f'Возраст: <b>{second_user.age}</b>\n' \
@@ -345,7 +346,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
     # Если пользователь выбрал вариант 3 "Я больше не хочу никого искать"
     elif option == '3':
         # Если текущий язык пользователя Русский
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
             text_ru = 'Так ты не узнаешь, что кому-то нравишься... Точно хочешь отключить свою анкету?\n\n' \
                       '1. Да, отключить анкету.\n' \
                       '2. Нет, вернуться назад.'
@@ -376,7 +377,7 @@ async def handler_zzz(message: types.Message, state: FSMContext):
     # Если пользователь не выбрал вариант, а что-то написал
     else:
         # Если текущий язык пользователя Русский
-        if language_second_user == '🇷🇺 Русский':
+        if language_second_user == ru_button.text:
             await message.answer('Нет такого варианта ответа')
 
         # Если текущий язык пользователя Английский

@@ -7,6 +7,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from keyboards.inline.gaming_keyboards import profile_action_target_keyboard, profile_action_like_keyboard
 from loader import dp, bot, db
 from utils.db_api import models
+from keyboards.inline.gaming_keyboards import ru_button
 
 
 # Сюда попадаем, когда пользователь написал письмо, либо нажал "Вернуться назад"
@@ -36,7 +37,7 @@ async def send_message(message: types.Message, state: FSMContext):
     # Если пользователь нажал "Вернуться назад"
     if message.text == 'Вернуться назад' or message.text == 'Go back':
         # Если текущий язык пользователя Русский
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
 
             text_just_play_ru = f'Возраст: <b>{current_profile.age}</b>\n' \
                                 f'Пол: <b>{current_profile.gender}</b>\n' \
@@ -90,7 +91,7 @@ async def send_message(message: types.Message, state: FSMContext):
         count_users_send_message = len(all_users_send_message)
 
         # Если текущий язык анкеты пользователя Русский
-        if language_current_profile == '🇷🇺 Русский':
+        if language_current_profile == ru_button.text:
             if count_users_send_message == 1:
                 caption = f'Твоя анкета понравилась {count_users_send_message} пользователю, показать его?\n\n' \
                           f'1. Показать.\n' \
@@ -131,7 +132,7 @@ async def send_message(message: types.Message, state: FSMContext):
             current_profile: models.User = profiles[current_profile_number + 1]
 
             # Если текущий язык пользователя Русский
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 text_just_play_ru = f'Возраст: <b>{current_profile.age}</b>\n' \
                                     f'Пол: <b>{current_profile.gender}</b>\n' \
                                     f'Цель: <b>{current_profile.purpose}</b>\n' \
@@ -168,7 +169,7 @@ async def send_message(message: types.Message, state: FSMContext):
 
         # Если профили закончились
         else:
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 await message.answer('Профили по вашим критериям поиска закончились!\n'
                                      'Попробуйте повторить поиск позднее или изменить критерии поиска.',
                                      reply_markup=ReplyKeyboardMarkup(keyboard=[

@@ -4,6 +4,7 @@ from aiogram.dispatcher.filters import Command
 
 from loader import db
 from keyboards.inline.gaming_keyboards import show_looking_for_keyboard, menu_my_profile_keyboard, get_teammates_country
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp
 from utils.db_api import models
 
@@ -21,7 +22,10 @@ async def profile_change_match(message: types.Message, state: FSMContext):
     text_ru = 'Кого ты ищешь?'
     text_en = 'Who are you looking for?'
 
-    await message.answer(text='Кого ты ищешь?', reply_markup=show_looking_for_keyboard(language, age))
+    if language == ru_button.text:
+        await message.answer(text=text_ru, reply_markup=show_looking_for_keyboard(language, age))
+    else:
+        await message.answer(text=text_en, reply_markup=show_looking_for_keyboard(language, age))
 
     await state.set_state('change_match_looking_for')
 
@@ -62,7 +66,7 @@ async def edit_looking_for(message: types.Message, state: FSMContext):
     # Если пользователь выбрал "Просто поиграть", и ранее он не заполнял анкету по данной цели
     if purpose in ['Просто поиграть', 'Just to play'] and user.play_level == '':
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Из каких стран вы хотите, что бы были ваши тиммейты?',
                                  reply_markup=get_teammates_country(language))
 
@@ -93,9 +97,8 @@ async def edit_looking_for(message: types.Message, state: FSMContext):
                   f'Level of play: <b>{user.play_level}</b>\n' \
                   f'Your cool down: <b>{user.cool_down}</b>'
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Ваш профиль:')
-
             if photo == 'None':
                 await message.answer(text=text_ru)
             else:
@@ -121,15 +124,13 @@ async def edit_looking_for(message: types.Message, state: FSMContext):
 
     # Если пользователь выбрал "Команду для праков"
     elif purpose in ['Команду для праков', 'A team for practitioners']:
-
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Данная функция находится в стадии разработки',
                                  reply_markup=show_looking_for_keyboard(language, age))
         else:
             await message.answer('This feature is under development',
                                  reply_markup=show_looking_for_keyboard(language, age))
         return
-
     # Если пользователь выбрал "Человека в реальной жизни"
     else:
         text_ru = f'Имя: <b>{name}</b>\n' \
@@ -154,8 +155,7 @@ async def edit_looking_for(message: types.Message, state: FSMContext):
                   f'Hobby: <b>{hobby}</b>\n' \
                   f'Playing games: <b>{games}</b>'
 
-        if language == '🇷🇺 Русский':
-
+        if language == ru_button.text:
             if photo == 'None':
                 await message.answer(text=text_ru)
             else:

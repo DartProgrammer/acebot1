@@ -3,6 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Command
 
 from keyboards.inline.gaming_keyboards import language_keyboard, menu_language_keyboard, menu_my_profile_keyboard
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp
 from utils.db_api import models
 from utils.db_api.db_commands import DBCommands
@@ -17,7 +18,7 @@ async def command_language(message: types.Message, state: FSMContext):
     user: models.User = await db.get_user(user_id)
     language = user.language
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         await message.answer('Язык:', reply_markup=language_keyboard)
     else:
         await message.answer('Language:', reply_markup=language_keyboard)
@@ -77,7 +78,7 @@ async def edit_language(message: types.Message, state: FSMContext):
                   f'Level of play: <b>{user.play_level}</b>\n' \
                   f'Your cool down: <b>{user.cool_down}</b>'
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Ваш профиль:')
 
             if photo == 'None':
@@ -125,7 +126,7 @@ async def edit_language(message: types.Message, state: FSMContext):
                   f'Hobby: <b>{user.hobby}</b>\n' \
                   f'Playing games: <b>{games}</b>'
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer('Ваш профиль:')
 
             if photo == 'None':

@@ -8,6 +8,7 @@ from emoji.core import emojize
 from handlers.users.my_profile import find_query
 from keyboards.inline.gaming_keyboards import get_send_message_keyboard, \
     complain_keyboard, profile_action_like_keyboard, action_for_profile
+from keyboards.inline.gaming_keyboards import ru_button
 from loader import dp, bot, db
 from utils.db_api import models
 
@@ -53,7 +54,7 @@ async def show_users_profiles(message: types.Message, state: FSMContext):
     else:
         games = ''
 
-    if language_second_user == '🇷🇺 Русский':
+    if language_second_user == ru_button.text:
         # Изменяем текст в зависимости от количества лайков
         if count_users_send_message == 1:
             text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -112,7 +113,7 @@ async def not_show_users_profiles(message: types.Message, state: FSMContext):
     language = second_user.language
     await state.update_data(second_user=second_user)
 
-    if language == '🇷🇺 Русский':
+    if language == ru_button.text:
         text = 'Так ты не узнаешь, что кому-то нравишься... ' \
                'Точно хочешь отключить свою анкету?\n\n' \
                '1. Да, отключить анкету.\n' \
@@ -143,7 +144,7 @@ async def answer_message(message: types.Message, state: FSMContext):
     user_language = second_user.language
 
     if message.text in ['Ответить', 'Answer']:
-        if user_language == '🇷🇺 Русский':
+        if user_language == ru_button.text:
             await message.answer('Напишите сообщение, которое хотите отправить')
         else:
             await message.answer('Write the message you want to send')
@@ -151,7 +152,7 @@ async def answer_message(message: types.Message, state: FSMContext):
         await state.set_state('in_send_message_just_play_wait_answer')
 
     elif message.text in ['⚠️ Пожаловаться', '⚠️ Complain']:
-        if user_language == '🇷🇺 Русский':
+        if user_language == ru_button.text:
             await message.answer(f'Укажите причину жалобы:\n\n'
                                  f'1. {emojize(":no_one_under_eighteen:")} Материал для взрослых\n'
                                  f'2. {emojize(":shopping_cart:")} Продажа товаров и услуг\n'
@@ -219,7 +220,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             await db.add_complaint_for_profile(complaint_profile_id=current_profile_user_id,
                                                reason_complaint=reason_complaint)
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer(f'Ваша жалоба принята.\n\n'
                                  f'Жалоба: <b>Материал для взрослых</b>\n\n'
                                  f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
@@ -247,7 +248,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             else:
                 games = ''
 
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 # Изменяем текст в зависимости от количества лайков
                 if count_users_send_message_for_text == 0:
                     text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -304,7 +305,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 
         # Сюда попадаем, когда показали всех пользователей, которым понравилась анкета
         else:
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 await message.answer(f'Чтобы получать больше лайков ❤️\n'
                                      f'Подпишись на канал Ссылка на канал✅',
                                      reply_markup=ReplyKeyboardMarkup(keyboard=[
@@ -348,7 +349,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             await db.add_complaint_for_profile(complaint_profile_id=current_profile_user_id,
                                                reason_complaint=reason_complaint)
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer(f'Ваша жалоба принята.\n\n'
                                  f'Жалоба: <b>Продажа товаров и услуг</b>\n\n'
                                  f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
@@ -376,7 +377,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             else:
                 games = ''
 
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 # Изменяем текст в зависимости от количества лайков
                 if count_users_send_message_for_text == 0:
                     text = f'Кому-то понравилась твоя анкета:\n\n' \
@@ -433,7 +434,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 
         # Сюда попадаем, когда показали всех пользователей, которым понравилась анкета
         else:
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 await message.answer(f'Чтобы получать больше лайков ❤️\n'
                                      f'Подпишись на канал Ссылка на канал✅',
                                      reply_markup=ReplyKeyboardMarkup(keyboard=[
@@ -477,7 +478,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             await db.add_complaint_for_profile(complaint_profile_id=current_profile_user_id,
                                                reason_complaint=reason_complaint)
 
-        if language == '🇷🇺 Русский':
+        if language == ru_button.text:
             await message.answer(f'Ваша жалоба принята.\n\n'
                                  f'Жалоба: <b>Не отвечает</b>\n\n'
                                  f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
@@ -505,7 +506,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             else:
                 games = ''
 
-            if language == '🇷🇺 Русский':
+            if language == ru_button.text:
                 # Изменяем текст в зависимости от количества лайков
                 if count_users_send_message_for_text == 0:
                     text = f'Кому-то понравилась твоя анкета:\n\n' \
