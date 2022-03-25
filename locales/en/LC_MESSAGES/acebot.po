@@ -1,0 +1,1479 @@
+# English translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-03-25 19:00+0300\n"
+"PO-Revision-Date: 2022-03-25 19:04+0300\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: handlers/users/change_match.py:21 handlers/users/edit_profile.py:65
+#: handlers/users/edit_profile.py:93 handlers/users/users_info.py:52
+#: handlers/users/users_info.py:95
+msgid "Кого ты ищешь?"
+msgstr "Who are you looking for?"
+
+#: handlers/users/change_match.py:60 handlers/users/edit_profile.py:80
+#: handlers/users/users_info.py:67
+msgid "Из каких стран вы хотите, что бы были ваши тиммейты?"
+msgstr "From which countries do you want your teammates to be?"
+
+#: handlers/users/change_match.py:66 handlers/users/disable_profile.py:88
+#: handlers/users/disable_profile_just_play.py:90
+#: handlers/users/disable_second_profile_just_play.py:133
+#: handlers/users/edit_profile_description.py:43
+#: handlers/users/edit_profile_description.py:65
+#: handlers/users/edit_profile_photo.py:44 handlers/users/edit_profile_photo.py:65
+#: handlers/users/just_play.py:232 handlers/users/language.py:55
+#: handlers/users/language.py:79 handlers/users/my_profile.py:54
+#: handlers/users/zzz.py:62 handlers/users/zzz_just_play.py:63
+#: handlers/users/zzz_just_play_second_user.py:98
+#: handlers/users/zzz_just_play_second_user.py:226
+#: handlers/users/zzz_second_user.py:96 handlers/users/zzz_second_user.py:222
+msgid "Ваш профиль:"
+msgstr "Your profile:"
+
+#: handlers/users/change_match.py:67 handlers/users/disable_profile_just_play.py:78
+msgid ""
+"Возраст: <b>{age}</b>\n"
+"Пол: <b>{gender}</b>\n"
+"Цель: <b>{purpose}</b>\n"
+"Страна поиска: <b>{country}</b>\n"
+"О себе: <b>{about_yourself}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Уровень игры: <b>{play_level}</b>\n"
+"Ваш К/Д: <b>{cool_down}</b>"
+msgstr ""
+"Age: <b>{age}</b>\n"
+"Floor: <b>{gender}</b>\n"
+"Purpose: <b>{purpose}</b>\n"
+"Country of search: <b>{country}</b>\n"
+"About me: <b>{about_yourself}</b>\n"
+"What games do I play: <b>{games}</b>\n"
+"Game Level: <b>{play_level}</b>\n"
+"Your ticket: <b>{cool_down}</b>"
+
+#: handlers/users/change_match.py:82 handlers/users/change_match.py:118
+#: handlers/users/disable_profile.py:95
+#: handlers/users/disable_profile_just_play.py:97
+#: handlers/users/disable_second_profile.py:144
+#: handlers/users/disable_second_profile_just_play.py:140
+#: handlers/users/edit_profile_description.py:48
+#: handlers/users/edit_profile_description.py:67
+#: handlers/users/edit_profile_description.py:117
+#: handlers/users/edit_profile_description.py:136
+#: handlers/users/edit_profile_just_play.py:200
+#: handlers/users/edit_profile_photo.py:49 handlers/users/edit_profile_photo.py:67
+#: handlers/users/edit_profile_photo.py:125
+#: handlers/users/edit_profile_photo.py:144 handlers/users/just_play.py:234
+#: handlers/users/just_play_after_change_match.py:240 handlers/users/language.py:62
+#: handlers/users/language.py:86 handlers/users/my_profile.py:61
+#: handlers/users/my_profile.py:85 handlers/users/zzz.py:68
+#: handlers/users/zzz_just_play.py:70
+#: handlers/users/zzz_just_play_second_user.py:105
+#: handlers/users/zzz_just_play_second_user.py:233
+#: handlers/users/zzz_second_user.py:103 handlers/users/zzz_second_user.py:229
+msgid ""
+"1. Заполнить анкету заново\n"
+"2. Изменить фото\n"
+"3. Изменить текст анкеты\n"
+"4. Смотреть анкеты"
+msgstr ""
+"1. Fill in the application form again\n"
+"2. Change photo\n"
+"3. Change the text of the questionnaire\n"
+"4. View profiles"
+
+#: handlers/users/change_match.py:100 handlers/users/disable_profile.py:74
+#: handlers/users/disable_second_profile.py:123
+msgid ""
+"Имя: <b>{name}</b>\n"
+"Возраст: <b>{age}</b>\n"
+"Пол: <b>{gender}</b>\n"
+"Ищу: <b>{purpose}</b>\n"
+"Кого ищу: <b>{who_search}</b>\n"
+"Страна: <b>{country}</b>\n"
+"Город: <b>{city}</b>\n"
+"О себе: <b>{about_yourself}</b>\n"
+"Хобби: <b>{hobby}</b>\n"
+"В какие игры играю: <b>{games}</b>"
+msgstr ""
+"Name: <b>{name}</b>\n"
+"Age: <b>{age}</b>\n"
+"Floor: <b>{gender}</b>\n"
+"Seeking: <b>{purpose}</b>\n"
+"Who I'm looking for: <b>{who_search}</b>\n"
+"Country: <b>{country}</b>\n"
+"City: <b>{city}</b>\n"
+"About me: <b>{about_yourself}</b>\n"
+"Hobby: <b>{hobby}</b>\n"
+"What games do I play: <b>{games}</b>"
+
+#: handlers/users/complain.py:24
+msgid "Жалобу можно оставить только при просмотре анкеты"
+msgstr "A complaint can be left only when viewing the questionnaire"
+
+#: handlers/users/complain.py:28 handlers/users/send_message_answer.py:123
+#: handlers/users/send_message_answer_just_play.py:127
+msgid ""
+"Укажите причину жалобы:\n"
+"\n"
+"1. 🔞 Материал для взрослых\n"
+"2. 🛒 Продажа товаров и услуг\n"
+"3. 🔇 Не отвечает\n"
+"4. ❓ Другое\n"
+"5. ✖️ Отмена\n"
+msgstr ""
+"Specify the reason for the complaint:\n"
+"\n"
+"1. 🔞 Material for adults\n"
+"2. 🛒 Sale of goods and services\n"
+"3. 🔇 Not responding\n"
+"4. ❓ Other\n"
+"5. ✖️ Cancellation\n"
+
+#: handlers/users/complain.py:75 handlers/users/complain.py:126
+#: handlers/users/complain.py:177
+msgid ""
+"Ваша жалоба принята.\n"
+"\n"
+"Жалоба: <b>Материал для взрослых</b>\n"
+"\n"
+"Пользователь: <b>{current_profile_name}, {current_profile_age}</b>"
+msgstr ""
+"Your complaint has been accepted.\n"
+"\n"
+"Complaint: <b>Adult Material</b>\n"
+"\n"
+"User: <b>{current_profile_name}, {current_profile_age}</b>"
+
+#: handlers/users/complain.py:96 handlers/users/complain.py:147
+#: handlers/users/complain.py:198 handlers/users/complain.py:277
+msgid ""
+"К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n"
+"Попробуйте возобновить поиск позднее или измените критерии поиска."
+msgstr ""
+"Unfortunately, the profiles that fit your search criteria are over!\n"
+"Try resuming the search later or change the search criteria."
+
+#: handlers/users/complain.py:206 handlers/users/send_message_answer.py:439
+#: handlers/users/send_message_answer_just_play.py:456
+msgid "Напишите причину жалобы"
+msgstr "Write the reason for the complaint"
+
+#: handlers/users/complain.py:219 handlers/users/edit_profile.py:197
+#: handlers/users/find_profiles.py:174
+#: handlers/users/find_profiles_just_play.py:179
+#: handlers/users/send_message_answer.py:490
+#: handlers/users/send_message_answer_just_play.py:512
+#: handlers/users/users_info.py:192
+msgid "Не знаю такой символ"
+msgstr "I don’t know such a symbol"
+
+#: handlers/users/complain.py:255
+msgid ""
+"Ваша жалоба принята.\n"
+"\n"
+"Жалоба: <b>{reason_complaint}</b>\n"
+"\n"
+"Пользователь: <b>{current_profile_name}, {current_profile_age}</b>"
+msgstr ""
+"Your complaint has been accepted.\n"
+"\n"
+"Complaint: <b>{reason_complaint}</b>\n"
+"\n"
+"User: <b>{current_profile_name}, {current_profile_age}</b>"
+
+#: handlers/users/disable_profile.py:22
+#: handlers/users/disable_profile_just_play.py:26
+#: handlers/users/disable_second_profile.py:24
+#: handlers/users/disable_second_profile.py:70
+#: handlers/users/disable_second_profile_just_play.py:24
+#: handlers/users/disable_second_profile_just_play.py:70
+msgid ""
+"Надеюсь, ты нашел кого-то благодаря мне! Рад был с тобой пообщаться, будет "
+"скучно – пиши, обязательно найдем тебе кого-нибудь 😉\n"
+"\n"
+"1. Смотреть анкеты"
+msgstr ""
+"I hope you found someone thanks to me! I was glad to talk to you, it will be "
+"boring - write, we will definitely find someone for you 😉\n"
+"\n"
+"1. View questionnaires"
+
+#: handlers/users/disable_profile.py:28
+#: handlers/users/disable_profile_just_play.py:32
+#: handlers/users/disable_second_profile.py:30
+#: handlers/users/disable_second_profile.py:76
+#: handlers/users/disable_second_profile_just_play.py:30
+#: handlers/users/disable_second_profile_just_play.py:76
+msgid "Смотреть анкеты"
+msgstr "View questionnaires"
+
+#: handlers/users/disable_profile.py:35
+#: handlers/users/disable_profile_just_play.py:40
+#: handlers/users/find_profiles.py:157
+#: handlers/users/find_profiles_just_play.py:163
+msgid ""
+"1. Смотреть анкеты\n"
+"2. Моя анкета\n"
+"3. Я больше не хочу никого искать"
+msgstr ""
+"1. View questionnaires\n"
+"2. My profile\n"
+"3. I don’t want to look for anyone anymore"
+
+#: handlers/users/disable_profile.py:50
+#: handlers/users/disable_profile_just_play.py:53
+#: handlers/users/disable_second_profile.py:53
+#: handlers/users/disable_second_profile.py:99
+#: handlers/users/disable_second_profile_just_play.py:53
+#: handlers/users/disable_second_profile_just_play.py:99 handlers/users/zzz.py:92
+#: handlers/users/zzz_just_play.py:94
+#: handlers/users/zzz_just_play_second_user.py:131
+#: handlers/users/zzz_just_play_second_user.py:258
+#: handlers/users/zzz_second_user.py:127 handlers/users/zzz_second_user.py:256
+msgid "Нет такого варианта ответа"
+msgstr "There is no such answer option"
+
+#: handlers/users/disable_second_profile.py:38
+#: handlers/users/disable_second_profile.py:84
+#: handlers/users/disable_second_profile_just_play.py:38
+#: handlers/users/disable_second_profile_just_play.py:84
+msgid ""
+"1. Показать профили, которым я нравлюсь\n"
+"2. Моя анкета\n"
+"3. Я больше не хочу никого искать"
+msgstr ""
+"1. Show profiles that like me\n"
+"2. My profile\n"
+"3. I don’t want to look for anyone anymore"
+
+#: handlers/users/disable_second_profile_just_play.py:124
+#: handlers/users/edit_profile_description.py:34
+#: handlers/users/edit_profile_photo.py:35 handlers/users/language.py:46
+#: handlers/users/my_profile.py:45 handlers/users/zzz_just_play.py:54
+msgid ""
+"Возраст: <b>{user.age}</b>\n"
+"Пол: <b>{user.gender}</b>\n"
+"Цель: <b>{user.purpose}</b>\n"
+"Страна поиска: <b>{user.country}</b>\n"
+"О себе: <b>{user.about_yourself}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Уровень игры: <b>{user.play_level}</b>\n"
+"Ваш К/Д: <b>{user.cool_down}</b>"
+msgstr ""
+"Age: <b>{user.age}</b>\n"
+"Gender: <b>{user.gender}</b>\n"
+"Purpose: <b>{user.purpose}</b>\n"
+"Search country: <b>{user.country}</b>\n"
+"About yourself: <b>{user.about_yourself}</b>\n"
+"What games do I play: <b>{games}</b>\n"
+"Game level: <b>{user.play_level}</b>\n"
+"Your C/D: <b>{user.cool_down}</b>"
+
+#: handlers/users/echo.py:11 handlers/users/echo.py:18
+msgid ""
+"Вы зачем бота ломаете -_-. Не ломайте его пожалуйста, а если что-то сработало "
+"некорректно, то отправьте пожалуйста скрин @boost_ace"
+msgstr ""
+"Why are you breaking the bot -_-. Please do not break it, and if something "
+"worked incorrectly, then please send a screenshot to @boost_ace"
+
+#: handlers/users/edit_profile.py:30 handlers/users/edit_profile_just_play.py:57
+#: handlers/users/just_play.py:102
+#: handlers/users/just_play_after_change_match.py:96
+#: handlers/users/users_info.py:31
+msgid "Введите число"
+msgstr "Enter a number"
+
+#: handlers/users/edit_profile.py:35 handlers/users/users_info.py:35
+msgid "Укажите правильный возраст"
+msgstr "Specify the correct age"
+
+#: handlers/users/edit_profile.py:40
+msgid "⛔ ️ВАМ ЗАПРЕЩЕНО ПОЛЬЗОВАТЬСЯ ДАННЫМ БОТОМ ⛔️"
+msgstr "⛔ ️YOU ARE NOT ALLOWED TO USE THIS BOT ⛔️"
+
+#: handlers/users/edit_profile.py:47 handlers/users/users_info.py:47
+msgid ""
+"Привет, я просто хочу сказать тебе, что в этом мире не все так радужно и "
+"беззаботно, полно злых людей, которые выдают себя не за тех, кем являются - "
+"никому и никогда не скидывай свои фотографии, никогда не соглашайся на встречи "
+"вечером или не в людных местах, и подозревай всех) Я просто переживаю о тебе и "
+"береги себя!"
+msgstr ""
+"Hi, I just want to tell you that in this world, not everything is so rosy and "
+"carefree, full of evil people who pretend not to be who they are - never throw "
+"off your photos to anyone, never agree to meetings in the evening or not in "
+"crowded places, and suspect everyone) I’m just worried about you and take care "
+"of yourself!"
+
+#: handlers/users/edit_profile.py:52 handlers/users/just_play.py:23
+#: handlers/users/just_play.py:58 handlers/users/just_play_after_change_match.py:23
+#: handlers/users/just_play_after_change_match.py:50
+#: handlers/users/users_info.py:77
+msgid "Ты парень или девушка?"
+msgstr "Are you a guy or a girl?"
+
+#: handlers/users/edit_profile.py:87 handlers/users/users_info.py:72
+msgid "Данная функция находится в стадии разработки"
+msgstr "This feature is under development"
+
+#: handlers/users/edit_profile.py:96 handlers/users/edit_profile.py:109
+#: handlers/users/edit_profile.py:211 handlers/users/edit_profile.py:238
+#: handlers/users/just_play.py:42 handlers/users/just_play.py:54
+#: handlers/users/just_play.py:70 handlers/users/just_play.py:87
+#: handlers/users/just_play_after_change_match.py:40
+#: handlers/users/users_info.py:80 handlers/users/users_info.py:92
+#: handlers/users/users_info.py:106 handlers/users/users_info.py:207
+#: handlers/users/users_info.py:232
+msgid "Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!"
+msgstr "I do not know such an option, please click on one of the keyboard buttons!"
+
+#: handlers/users/edit_profile.py:112 handlers/users/users_info.py:109
+msgid "Из какой ты страны?"
+msgstr "What country are you from?"
+
+#: handlers/users/edit_profile.py:151 handlers/users/edit_profile.py:187
+#: handlers/users/users_info.py:141 handlers/users/users_info.py:182
+msgid "Из какого ты региона? (выбери из списка)"
+msgstr "Из какого ты региона? (выбери из списка)"
+
+#: handlers/users/edit_profile.py:156 handlers/users/users_info.py:146
+msgid ""
+"Вы имели ввиду <b>{country_name}</b>?\n"
+"Совпадение: <b>{coincidence}%</b>"
+msgstr ""
+"Did you mean <b>{country_name}</b>?\n"
+"Coincidence: <b>{coincidence}%</b>"
+
+#: handlers/users/edit_profile.py:192 handlers/users/users_info.py:187
+msgid "Просьба еще раз ввести корректное название страны"
+msgstr "Please enter the correct country name again"
+
+#: handlers/users/edit_profile.py:222 handlers/users/users_info.py:218
+msgid "Из какого ты города? (выбери из списка)"
+msgstr "What city are you from? (choose from the list)"
+
+#: handlers/users/edit_profile.py:241 handlers/users/users_info.py:235
+msgid "Как твоё имя?"
+msgstr "What is your name?"
+
+#: handlers/users/edit_profile.py:257 handlers/users/my_profile.py:127
+#: handlers/users/users_info.py:277
+msgid "Расскажи о себе."
+msgstr "Tell me about yourself."
+
+#: handlers/users/edit_profile.py:260 handlers/users/edit_profile.py:283
+#: handlers/users/edit_profile_just_play.py:75 handlers/users/just_play.py:121
+#: handlers/users/just_play_after_change_match.py:113
+msgid "Пропустить"
+msgstr "Skip"
+
+#: handlers/users/edit_profile.py:279 handlers/users/users_info.py:285
+msgid "Твои хобби? Напиши через “запятую” то, чем ты любишь заниматься."
+msgstr "Your hobbies? Write through the “comma“ what you like to do."
+
+#: handlers/users/edit_profile.py:306 handlers/users/users_info.py:303
+msgid ""
+"Хобби имеет ограничение по количеству символов = <b>{HOBBY_STRING_LENGTH}</b>,\n"
+" ваше хобби имеет количество символов = <b>{length}</b>!\n"
+"Укажите хобби покороче."
+msgstr ""
+"Hobby has a limit on the number of characters = <b>{HOBBY_STRING_LENGTH}</b>,\n"
+"your hobby has the number of characters = <b>{length}</b>!\n"
+"Specify a shorter hobby."
+
+#: handlers/users/edit_profile.py:318 handlers/users/edit_profile_just_play.py:72
+#: handlers/users/my_profile.py:115 handlers/users/users_info.py:310
+msgid "Пришли свое фото (не файл)"
+msgstr "Send your photo (not a file)"
+
+#: handlers/users/edit_profile.py:321
+msgid "Оставить текущее"
+msgstr "Leave the current"
+
+#: handlers/users/edit_profile.py:368 handlers/users/users_info.py:348
+msgid ""
+"Вот твой профиль:\n"
+"\n"
+"Имя: <b>{name}</b>\n"
+"Возраст: <b>{age}</b>\n"
+"Пол: <b>{gender}</b>\n"
+"Ищу: <b>{purpose}</b>\n"
+"Кого ищу: <b>{who_search}</b>\n"
+"Страна: <b>{country}</b>\n"
+"Город: <b>{city}</b>\n"
+"О себе: <b>{about_yourself}</b>\n"
+"Хобби: <b>{hobby}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Все верно?"
+msgstr ""
+"Here’s your profile:\n"
+"\n"
+"Name: <b>{name}</b>\n"
+"Age: <b>{age}</b>\n"
+"Gender: <b>{gender}</b>\n"
+"Looking for: <b>{purpose}</b>\n"
+"Who I’m looking for: <b>{who_search}</b>\n"
+"Country: <b>{country}</b>\n"
+"City: <b>{city}</b>\n"
+"About me: <b>{about_yourself}</b>\n"
+"Hobbies: <b>{hobby}</b>\n"
+"What games I play: <b>{games}</b>\n"
+"Is that right?"
+
+#: handlers/users/edit_profile.py:421 handlers/users/users_info.py:401
+msgid "Профиль успешно добавлен! Для перехода в основное меню, нажмите /my_profile"
+msgstr "Profile successfully added! To go to the main menu, press /my_profile"
+
+#: handlers/users/edit_profile_description.py:54
+#: handlers/users/edit_profile_photo.py:54 handlers/users/language.py:68
+#: handlers/users/my_profile.py:67 handlers/users/zzz.py:51
+msgid ""
+"Имя: <b>{user.name}</b>\n"
+"Возраст: <b>{user.age}</b>\n"
+"Пол: <b>{user.gender}</b>\n"
+"Ищу: <b>{user.purpose}</b>\n"
+"Кого ищу: <b>{user.who_search}</b>\n"
+"Страна: <b>{user.country}</b>\n"
+"Город: <b>{user.city}</b>\n"
+"О себе: <b>{user.about_yourself}</b>\n"
+"Хобби: <b>{user.hobby}</b>\n"
+"В какие игры играю: <b>{games}</b>"
+msgstr ""
+"Name: <b>{user.name}</b>\n"
+"Age: <b>{user.age}</b>\n"
+"Gender: <b>{user.gender}</b>\n"
+"Search: <b>{user.purpose}</b>\n"
+"Who search: <b>{user.who_search}</b>\n"
+"Country: <b>{user.country}</b>\n"
+"City: <b>{user.city}</b>\n"
+"About yourself: <b>{user.about_yourself}</b>\n"
+"Hobby: <b>{user.hobby}</b>\n"
+"What games do I play: <b>{games}</b>"
+
+#: handlers/users/edit_profile_description.py:100
+#: handlers/users/edit_profile_photo.py:108
+msgid ""
+"Вот твой профиль:\n"
+"\n"
+"Возраст: <b>{user.age}</b>\n"
+"Пол: <b>{user.gender}</b>\n"
+"Цель: <b>{user.purpose}</b>\n"
+"Страна поиска: <b>{user.country}</b>\n"
+"О себе: <b>{user.about_yourself}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Уровень игры: <b>{user.play_level}</b>\n"
+"Ваш К/Д: <b>{user.cool_down}</b>"
+msgstr ""
+"Here’s your profile:\n"
+"\n"
+"Age: <b>{user.age}</b>\n"
+"Gender: <b>{user.gender}</b>\n"
+"Goal: <b>{user.purpose}</b>\n"
+"Search country: <b>{user.country}</b>\n"
+"About me: <b>{user.about_yourself}</b>\n"
+"What games I play: <b>{games}</b>\n"
+"Game level: <b>{user.play_level}</b>\n"
+"Your K/D: <b>{user.cool_down}</b>"
+
+#: handlers/users/edit_profile_description.py:110
+#: handlers/users/edit_profile_description.py:134
+#: handlers/users/edit_profile_photo.py:118
+#: handlers/users/edit_profile_photo.py:142
+msgid "Сохранили изменения, посмотрим как выглядит твоя анкета теперь"
+msgstr "Saved the changes, let’s see what your profile looks like now"
+
+#: handlers/users/edit_profile_description.py:124
+msgid ""
+"Имя: <b>{user.name}</b>\n"
+"Возраст: <b>{user.age}</b>\n"
+"Пол: <b>{user.gender}</b>\n"
+"Кого ищу: <b>{user.who_search}</b>\n"
+"Страна: <b>{user.country}</b>\n"
+"Город: <b>{user.city}</b>\n"
+"О себе: <b>{about_yourself}</b>\n"
+"Хобби: <b>{user.hobby}</b>\n"
+"В какие игры играю: <b>{games}</b>"
+msgstr ""
+"Name: <b>{user.name}</b>\n"
+"Age: <b>{user.age}</b>\n"
+"Gender: <b>{user.gender}</b>\n"
+"Who search: <b>{user.who_search}</b>\n"
+"Country: <b>{user.country}</b>\n"
+"City: <b>{user.city}</b>\n"
+"About yourself: <b>{about_yourself}</b>\n"
+"Hobby: <b>{user.hobby}</b>\n"
+"What games do I play: <b>{games}</b>"
+
+#: handlers/users/edit_profile_just_play.py:28 handlers/users/just_play.py:74
+#: handlers/users/just_play_after_change_match.py:62
+msgid "Ваш уровень игры?"
+msgstr "Your level of play?"
+
+#: handlers/users/edit_profile_just_play.py:41
+#: handlers/users/just_play_after_change_match.py:78
+msgid "Выберите вариант из списка"
+msgstr "Select an option from the list"
+
+#: handlers/users/edit_profile_just_play.py:46 handlers/users/just_play.py:91
+#: handlers/users/just_play_after_change_match.py:82
+msgid "Ваше К/Д??"
+msgstr "Your C/D??"
+
+#: handlers/users/edit_profile_just_play.py:62 handlers/users/just_play.py:106
+#: handlers/users/just_play_after_change_match.py:100
+msgid "Что-то от себя?"
+msgstr "Something from yourself?"
+
+#: handlers/users/edit_profile_just_play.py:108 handlers/users/just_play.py:150
+#: handlers/users/just_play_after_change_match.py:146
+msgid ""
+"Вот твой профиль:\n"
+"\n"
+"Возраст: <b>{age}</b>\n"
+"Пол: <b>{gender}</b>\n"
+"Цель: <b>{purpose}</b>\n"
+"Страна поиска: <b>{country}</b>\n"
+"О себе: <b>{about_yourself}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Уровень игры: <b>{play_level}</b>\n"
+"Ваш К/Д: <b>{cool_down}</b>\n"
+"\n"
+"Все верно?"
+msgstr ""
+"Here’s your profile:\n"
+"\n"
+"Age: <b>{age}</b>\n"
+"Gender: <b>{gender}</b>\n"
+"Goal: <b>{purpose}</b>\n"
+"Search country: <b>{country}</b>\n"
+"About me: <b>{about_yourself}</b>\n"
+"What games I play: <b>{games}</b>\n"
+"Game level: <b>{play_level}</b>\n"
+"Your Q/A: <b>{cool_down}</b>\n"
+"\n"
+"Is that right?"
+
+#: handlers/users/edit_profile_just_play.py:186 handlers/users/just_play.py:219
+#: handlers/users/just_play_after_change_match.py:221
+msgid ""
+"Вот твой профиль:\n"
+"\n"
+"Возраст: <b>{age}</b>\n"
+"Пол: <b>{gender}</b>\n"
+"Цель: <b>{purpose}</b>\n"
+"Страна поиска: <b>{country}</b>\n"
+"О себе: <b>{about_yourself}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Уровень игры: <b>{play_level}</b>\n"
+"Ваш К/Д: <b>{cool_down}</b>"
+msgstr ""
+"Here’s your profile:\n"
+"\n"
+"Age: <b>{age}</b>\n"
+"Gender: <b>{gender}</b>\n"
+"Goal: <b>{purpose}</b>\n"
+"Search country: <b>{country}</b>\n"
+"About me: <b>{about_yourself}</b>\n"
+"What games I play: <b>{games}</b>\n"
+"Game level: <b>{play_level}</b>\n"
+"Your Q/A: <b>{cool_down}</b>"
+
+#: handlers/users/edit_profile_just_play.py:198 handlers/users/just_play.py:231
+#: handlers/users/just_play_after_change_match.py:233
+msgid "Профиль успешно добавлен!"
+msgstr "Profile successfully added!"
+
+#: handlers/users/edit_profile_photo.py:87 handlers/users/just_play.py:177
+#: handlers/users/just_play_after_change_match.py:169
+#: handlers/users/users_info.py:324
+msgid "Пришлите фото, не файл!"
+msgstr "Send your photo (not a file)"
+
+#: handlers/users/edit_profile_photo.py:132
+msgid ""
+"Имя: <b>{user.name}</b>\n"
+"Возраст: <b>{user.age}</b>\n"
+"Пол: <b>{user.gender}</b>\n"
+"Кого ищу: <b>{user.who_search}</b>\n"
+"Страна: <b>{user.country}</b>\n"
+"Город: <b>{user.city}</b>\n"
+"О себе: <b>{user.about_yourself}</b>\n"
+"Хобби: <b>{user.hobby}</b>\n"
+"В какие игры играю: <b>{games}</b>"
+msgstr ""
+"Name: <b>{user.name}</b>\n"
+"Age: <b>{user.age}</b>\n"
+"Gender: <b>{user.gender}</b>\n"
+"Who search: <b>{user.who_search}</b>\n"
+"Country: <b>{user.country}</b>\n"
+"City: <b>{user.city}</b>\n"
+"About yourself: <b>{about_yourself}</b>\n"
+"Hobby: <b>{user.hobby}</b>\n"
+"What games do I play: <b>{games}</b>"
+
+#: handlers/users/find_profiles.py:39 handlers/users/find_profiles_just_play.py:39
+msgid ""
+"Твоя анкета понравилась {count_users_liked} пользователю, показать его?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did the user like your profile {count_users_liked}, show it?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/find_profiles.py:43 handlers/users/find_profiles_just_play.py:43
+msgid ""
+"Твоя анкета понравилась {count_users_liked} пользователю, показать их?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did {count_users_liked} user like your profile, show them?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/find_profiles.py:47 handlers/users/find_profiles_just_play.py:47
+msgid ""
+"Твоя анкета понравилась {count_users_liked} пользователям, показать их?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did {count_users_liked} user like your profile, show them?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/find_profiles.py:76 handlers/users/find_profiles.py:130
+#: handlers/users/send_message.py:36 handlers/users/send_message.py:92
+msgid ""
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games_current_profile}</b>"
+msgstr ""
+"{current_profile.name}, {current_profile.age} from {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games_current_profile}</b>"
+
+#: handlers/users/find_profiles.py:92 handlers/users/find_profiles.py:146
+#: handlers/users/find_profiles_just_play.py:96
+#: handlers/users/find_profiles_just_play.py:152 handlers/users/send_message.py:109
+#: handlers/users/send_message_just_play.py:118
+msgid ""
+"Профили по вашим критериям поиска закончились!\n"
+"Попробуйте повторить поиск позднее или изменить критерии поиска."
+msgstr ""
+"Profiles based on your search criteria are over!\n"
+"Try to repeat the search later or change the search criteria."
+
+#: handlers/users/find_profiles.py:96 handlers/users/find_profiles.py:150
+#: handlers/users/find_profiles_just_play.py:100
+#: handlers/users/find_profiles_just_play.py:156 handlers/users/send_message.py:113
+#: handlers/users/send_message_just_play.py:122
+msgid "Главное меню"
+msgstr "Main menu"
+
+#: handlers/users/find_profiles.py:102
+#: handlers/users/find_profiles_just_play.py:106
+msgid "Напиши сообщение для этого пользователя"
+msgstr "Write a message for this user"
+
+#: handlers/users/find_profiles.py:105
+#: handlers/users/find_profiles_just_play.py:109 handlers/users/my_profile.py:130
+msgid "Вернуться назад"
+msgstr "Go back"
+
+#: handlers/users/find_profiles.py:156
+#: handlers/users/find_profiles_just_play.py:162
+msgid "Подождем, пока кто-то увидит твою анкету"
+msgstr "Let’s wait until someone sees your profile"
+
+#: handlers/users/find_profiles_just_play.py:77
+#: handlers/users/find_profiles_just_play.py:135
+#: handlers/users/send_message_just_play.py:39
+#: handlers/users/send_message_just_play.py:97
+msgid ""
+"Возраст: <b>{current_profile.age}</b>\n"
+"Пол: <b>{current_profile.gender}</b>\n"
+"Цель: <b>{current_profile.purpose}</b>\n"
+"Уровень игры: <b>{current_profile.play_level}</b>\n"
+"К/Д: <b>{current_profile.cool_down}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games_current_profile}</b>"
+msgstr ""
+"Age: <b>{current_profile.age}</b>\n"
+"Gender: <b>{current_profile.gender}</b>\n"
+"Purpose: <b>{current_profile.purpose}</b>\n"
+"Game level: <b>{current_profile.play_level}</b>\n"
+"C/D: <b>{current_profile.cool_down}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games_current_profile}</b>"
+
+#: handlers/users/games.py:14
+msgid ""
+"Выбери игру (игры), в которые вы играете! После нажатия на одну игру, вы сможете "
+"добавить еще одну."
+msgstr ""
+"Choose the game(s) you are playing! After clicking on one game, you will be able "
+"to add another one."
+
+#: handlers/users/games.py:29
+msgid ""
+"Вы играете в игру <b>{game1}</b>, хотите ли вы добавить еще какую-то игру или "
+"будем искать людей только в этой игре?"
+msgstr ""
+"Are you playing a game <b>{game1}</b>, do you want to add another game or will "
+"we look for people only in this game?"
+
+#: handlers/users/games.py:32 handlers/users/games.py:50
+msgid "Вы играете в игры <b>{game1}, {game2}</b>, нажмите \"Продолжить\""
+msgstr "You are playing games <b>{game1}, {game2}</b>, click \"Continue\""
+
+#: handlers/users/games.py:47
+msgid ""
+"Вы играете в игру <b>{game2}</b>, хотите ли вы добавить еще какую-то игру или "
+"будем искать людей только в этой игре?"
+msgstr ""
+"Are you playing a game <b>{game2}</b>, do you want to add another game or will "
+"we look for people only in this game?"
+
+#: handlers/users/games.py:58 handlers/users/my_profile.py:103
+msgid "Сколько тебе лет?"
+msgstr "How old are you?"
+
+#: handlers/users/just_play.py:37 handlers/users/just_play_after_change_match.py:35
+msgid "Выберите страну из списка"
+msgstr "Select a country from the list"
+
+#: handlers/users/just_play.py:118
+#: handlers/users/just_play_after_change_match.py:110
+msgid "Пришли любую фотографию (не файл), если хочешь!"
+msgstr "Send any photo (not a file) if you want!"
+
+#: handlers/users/language.py:17
+msgid "Язык:"
+msgstr "Language:"
+
+#: handlers/users/like_user_profile.py:52 handlers/users/like_user_profile.py:164
+#: handlers/users/like_user_profile.py:239 handlers/users/like_user_profile.py:343
+#: handlers/users/zzz_second_user.py:47
+msgid ""
+"Кому-то понравилась твоя анкета:\n"
+"\n"
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>"
+msgstr ""
+"Someone liked your profile:\n"
+"\n"
+"{current_profile.name}, {current_profile.age} from {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>"
+
+#: handlers/users/like_user_profile.py:59 handlers/users/like_user_profile.py:170
+#: handlers/users/like_user_profile.py:245 handlers/users/like_user_profile.py:349
+#: handlers/users/zzz_second_user.py:53
+msgid ""
+"Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n"
+"\n"
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>"
+msgstr ""
+"Someone liked your profile (and some {count_users_liked_for_text})\n"
+"\n"
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>"
+
+#: handlers/users/like_user_profile.py:82
+#: handlers/users/like_user_profile_just_play.py:83
+#: handlers/users/send_message_answer.py:95
+#: handlers/users/send_message_answer_just_play.py:98 handlers/users/zzz.py:77
+#: handlers/users/zzz_just_play.py:79
+#: handlers/users/zzz_just_play_second_user.py:116
+#: handlers/users/zzz_just_play_second_user.py:243
+#: handlers/users/zzz_second_user.py:112 handlers/users/zzz_second_user.py:241
+msgid ""
+"Так ты не узнаешь, что кому-то нравишься... Точно хочешь отключить свою анкету?\n"
+"\n"
+"1. Да, отключить анкету.\n"
+"2. Нет, вернуться назад."
+msgstr ""
+"That way you won’t know that someone likes you… Are you sure you want to disable "
+"your profile?\n"
+"\n"
+"1. Yes, disable the questionnaire.\n"
+"2. No, go back."
+
+#: handlers/users/like_user_profile.py:121 handlers/users/like_user_profile.py:297
+#: handlers/users/like_user_profile_just_play.py:121
+#: handlers/users/like_user_profile_just_play.py:308
+msgid "Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link_username}"
+msgstr "There is mutual sympathy! Start chatting 👉 {user_liked_link_username}"
+
+#: handlers/users/like_user_profile.py:137
+#: handlers/users/like_user_profile_just_play.py:137
+msgid "Есть взаимная симпатия! Начинай общаться 👉 {user_link_username}"
+msgstr "There is mutual sympathy! Start chatting 👉 {user_liked_link_username}"
+
+#: handlers/users/like_user_profile.py:187 handlers/users/like_user_profile.py:263
+#: handlers/users/like_user_profile.py:371
+#: handlers/users/like_user_profile_just_play.py:194
+#: handlers/users/like_user_profile_just_play.py:276
+#: handlers/users/like_user_profile_just_play.py:385
+#: handlers/users/send_message_answer.py:240
+#: handlers/users/send_message_answer.py:333
+#: handlers/users/send_message_answer.py:427
+#: handlers/users/send_message_answer.py:593
+#: handlers/users/send_message_answer.py:667
+#: handlers/users/send_message_answer_just_play.py:249
+#: handlers/users/send_message_answer_just_play.py:347
+#: handlers/users/send_message_answer_just_play.py:444
+#: handlers/users/send_message_answer_just_play.py:618
+#: handlers/users/send_message_answer_just_play.py:693
+msgid ""
+"Чтобы получать больше лайков ❤️\n"
+"Подпишись на канал Ссылка на канал✅"
+msgstr ""
+"To get more likes ❤️\n"
+"Subscribe to the channel Link to the channel✅"
+
+#: handlers/users/like_user_profile.py:191 handlers/users/like_user_profile.py:267
+#: handlers/users/like_user_profile.py:375
+#: handlers/users/like_user_profile_just_play.py:198
+#: handlers/users/like_user_profile_just_play.py:280
+#: handlers/users/like_user_profile_just_play.py:389
+#: handlers/users/send_message_answer.py:244
+#: handlers/users/send_message_answer.py:337
+#: handlers/users/send_message_answer.py:431
+#: handlers/users/send_message_answer.py:597
+#: handlers/users/send_message_answer.py:671
+#: handlers/users/send_message_answer_just_play.py:253
+#: handlers/users/send_message_answer_just_play.py:351
+#: handlers/users/send_message_answer_just_play.py:448
+#: handlers/users/send_message_answer_just_play.py:622
+#: handlers/users/send_message_answer_just_play.py:697
+msgid "Продолжить просмотр анкет"
+msgstr "Продолжить просмотр анкет"
+
+#: handlers/users/like_user_profile.py:201
+#: handlers/users/like_user_profile_just_play.py:208
+#: handlers/users/send_message_answer.py:119
+#: handlers/users/send_message_answer_just_play.py:123
+msgid "Напишите сообщение, которое хотите отправить"
+msgstr "Write the message you want to send"
+
+#: handlers/users/like_user_profile.py:312
+#: handlers/users/like_user_profile_just_play.py:324
+#: handlers/users/send_message_answer.py:638
+#: handlers/users/send_message_answer_just_play.py:664
+msgid "Есть взаимная симпатия! Начинай общаться 👉 {second_user_link_username}"
+msgstr "There is mutual sympathy! Start chatting 👉 {user_liked_link_username}"
+
+#: handlers/users/like_user_profile_just_play.py:51
+#: handlers/users/like_user_profile_just_play.py:164
+#: handlers/users/like_user_profile_just_play.py:246
+#: handlers/users/like_user_profile_just_play.py:355
+#: handlers/users/zzz_just_play_second_user.py:48
+msgid ""
+"Кому-то понравилась твоя анкета:\n"
+"\n"
+"Возраст: {current_profile.age}\n"
+"Пол: {current_profile.gender}\n"
+"О себе: {current_profile.about_yourself}\n"
+"Играет в: {games}\n"
+"Уровень игры: {current_profile.play_level}\n"
+"К/Д: {current_profile.cool_down}"
+msgstr ""
+"Someone liked your profile:\n"
+"\n"
+"Age: {current_profile.age}\n"
+"Gender: {current_profile.gender}\n"
+"About yourself: {current_profile.about_yourself}\n"
+"He play games: {games}\n"
+"Game level: {current_profile.play_level}\n"
+"C/D: {current_profile.cool_down}"
+
+#: handlers/users/like_user_profile_just_play.py:59
+#: handlers/users/like_user_profile_just_play.py:172
+#: handlers/users/like_user_profile_just_play.py:254
+#: handlers/users/like_user_profile_just_play.py:363
+#: handlers/users/zzz_just_play_second_user.py:56
+msgid ""
+"Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n"
+"\n"
+"Возраст: {current_profile.age}\n"
+"Пол: {current_profile.gender}\n"
+"О себе: {current_profile.about_yourself}\n"
+"Играет в: {games}\n"
+"Уровень игры: {current_profile.play_level}\n"
+"К/Д: {current_profile.cool_down}"
+msgstr ""
+"Someone liked your profile: (and some {count_users_liked_for_text})\n"
+"\n"
+"Age: {current_profile.age}\n"
+"Gender: {current_profile.gender}\n"
+"About yourself: {current_profile.about_yourself}\n"
+"He play games: {games}\n"
+"Game level: {current_profile.play_level}\n"
+"C/D: {current_profile.cool_down}"
+
+#: handlers/users/my_profile.py:139 handlers/users/my_profile.py:148
+#: handlers/users/send_message_answer.py:688
+#: handlers/users/send_message_answer.py:696
+#: handlers/users/send_message_answer_just_play.py:714
+#: handlers/users/send_message_answer_just_play.py:722
+msgid "Ищу подходящие анкеты 🔍"
+msgstr "Looking for suitable questionnaires 🔍"
+
+#: handlers/users/my_profile.py:142 handlers/users/send_message_answer.py:690
+#: handlers/users/send_message_answer_just_play.py:716
+msgid "Ищу подходящие анкеты 🔎"
+msgstr "Looking for suitable questionnaires 🔎"
+
+#: handlers/users/my_profile.py:173 handlers/users/send_message_answer.py:721
+#: handlers/users/send_message_answer_just_play.py:747
+msgid "По вашему запросу найден {count_profiles} профиль"
+msgstr "A {count_profiles} profile was found for your query"
+
+#: handlers/users/my_profile.py:175 handlers/users/send_message_answer.py:723
+#: handlers/users/send_message_answer_just_play.py:749
+msgid "По вашему запросу найдено {count_profiles} профиля"
+msgstr "{count_profiles} profile found for your query"
+
+#: handlers/users/my_profile.py:177 handlers/users/send_message_answer.py:725
+#: handlers/users/send_message_answer_just_play.py:751
+msgid "По вашему запросу найдено {count_profiles} профилей"
+msgstr "{count_profiles} profiles found for your query"
+
+#: handlers/users/my_profile.py:182 handlers/users/send_message_answer.py:729
+#: handlers/users/send_message_answer_just_play.py:756
+msgid ""
+"Возраст: <b>{first_profile.age}</b>\n"
+"Пол: <b>{first_profile.gender}</b>\n"
+"Цель: <b>{first_profile.purpose}</b>\n"
+"Уровень игры: <b>{first_profile.play_level}</b>\n"
+"К/Д: <b>{first_profile.cool_down}</b>\n"
+"О себе: <b>{first_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>"
+msgstr ""
+"Age: <b>{first_profile.age}</b>\n"
+"Gender: <b>{first_profile.gender}</b>\n"
+"Purpose: <b>{first_profile.purpose}</b>\n"
+"Game level: <b>{first_profile.play_level}</b>\n"
+"C/D: <b>{first_profile.cool_down}</b>\n"
+"About yourself: <b>{first_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>"
+
+#: handlers/users/my_profile.py:207 handlers/users/send_message_answer.py:753
+#: handlers/users/send_message_answer_just_play.py:780
+msgid ""
+"{first_profile.name}, {first_profile.age} из {first_profile.country}\n"
+"Хобби: <b>{first_profile.hobby}</b>\n"
+"О себе: <b>{first_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>"
+msgstr ""
+"{first_profile.name}, {first_profile.age} from {first_profile.country}\n"
+"Hobby: <b>{first_profile.hobby}</b>\n"
+"About yourself: <b>{first_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>"
+
+#: handlers/users/my_profile.py:232 handlers/users/send_message_answer.py:778
+#: handlers/users/send_message_answer_just_play.py:805
+msgid ""
+"По вашим критериям поиска не нашлось анкет.\n"
+"\n"
+"Попробуйте поискать позднее или измените критерии поиска."
+msgstr ""
+"There were no questionnaires according to your search criteria.\n"
+"\n"
+"Try searching later or change the search criteria."
+
+#: handlers/users/send_message.py:69 handlers/users/send_message_just_play.py:75
+msgid ""
+"Твоя анкета понравилась {count_users_send_message} пользователю, показать его?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did the user like your profile {count_users_send_message}, show it?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/send_message.py:73 handlers/users/send_message_just_play.py:79
+msgid ""
+"Твоя анкета понравилась {count_users_send_message} пользователю, показать их?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did the user like your profile {count_users_send_message}, show them?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/send_message.py:77 handlers/users/send_message_just_play.py:83
+msgid ""
+"Твоя анкета понравилась {count_users_send_message} пользователям, показать их?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did {count_users_send_message} users like your profile, show them?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/send_message_answer.py:60
+#: handlers/users/send_message_answer.py:208
+#: handlers/users/send_message_answer.py:300
+#: handlers/users/send_message_answer.py:394
+#: handlers/users/send_message_answer.py:461
+#: handlers/users/send_message_answer.py:560 handlers/users/zzz_second_user.py:168
+msgid ""
+"Кому-то понравилась твоя анкета:\n"
+"\n"
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>Письмо: <b>{current_profile.send_message_text}</b>"
+msgstr ""
+"Someone liked your profile:\n"
+"\n"
+"{current_profile.name}, {current_profile.age} from {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>Message: <b>{current_profile.send_message_text}</b>"
+
+#: handlers/users/send_message_answer.py:68
+#: handlers/users/send_message_answer.py:216
+#: handlers/users/send_message_answer.py:308
+#: handlers/users/send_message_answer.py:402
+#: handlers/users/send_message_answer.py:568 handlers/users/zzz_second_user.py:176
+msgid ""
+"Кому-то понравилась твоя анкета (и ещё {count_users_send_message_for_text})\n"
+"\n"
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>Письмо: <b>{current_profile.send_message_text}</b>"
+msgstr ""
+"Someone liked your profile: (and some {count_users_send_message_for_text})\n"
+"\n"
+"{current_profile.name}, {current_profile.age} from {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>Message: <b>{current_profile.send_message_text}</b>"
+
+#: handlers/users/send_message_answer.py:182
+#: handlers/users/send_message_answer_just_play.py:186
+msgid ""
+"Ваша жалоба принята.\n"
+"\n"
+"Жалоба: <b>Материал для взрослых</b>\n"
+"\n"
+"Пользователь: <b>{current_profile.name}, {current_profile.age}</b>"
+msgstr ""
+"Your complaint has been accepted.\n"
+"\n"
+"Complaint: <b>Adult Material</b>\n"
+"\n"
+"User: <b>{current_profile_name}, {current_profile_age}</b>"
+
+#: handlers/users/send_message_answer.py:275
+#: handlers/users/send_message_answer_just_play.py:284
+msgid ""
+"Ваша жалоба принята.\n"
+"\n"
+"Жалоба: <b>Продажа товаров и услуг</b>\n"
+"\n"
+"Пользователь: <b>{current_profile.name}, {current_profile.age}</b>"
+msgstr ""
+"Your complaint has been accepted.\n"
+"\n"
+"Complaint: <b>Sale of goods and services</b>\n"
+"\n"
+"User: <b>{current_profile.name }, {current_profile.age}</b>"
+
+#: handlers/users/send_message_answer.py:368
+#: handlers/users/send_message_answer_just_play.py:382
+msgid ""
+"Ваша жалоба принята.\n"
+"\n"
+"Жалоба: <b>Не отвечает</b>\n"
+"\n"
+"Пользователь: <b>{current_profile.name}, {current_profile.age}</b>"
+msgstr ""
+"Your complaint has been accepted.\n"
+"\n"
+"Complaint: <b>Not responding</b>\n"
+"\n"
+"User: <b>{current_profile.name }, {current_profile.age}</b>"
+
+#: handlers/users/send_message_answer.py:469
+msgid ""
+"Кому-то понравилась твоя анкета (и ещё {count_users_send_message_for_text + 1})\n"
+"\n"
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>Письмо: <b>{current_profile.send_message_text}</b>"
+msgstr ""
+"Someone liked your profile: (and some {count_users_send_message_for_text})\n"
+"\n"
+"{current_profile.name}, {current_profile.age} from {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>Message: <b>{current_profile.send_message_text}</b>"
+
+#: handlers/users/send_message_answer.py:535
+#: handlers/users/send_message_answer_just_play.py:556
+msgid ""
+"Ваша жалоба принята.\n"
+"\n"
+"Жалоба: <b>{reason_complaint}</b>\n"
+"\n"
+"Пользователь: <b>{current_profile.name}, {current_profile.age}</b>"
+msgstr ""
+"Your complaint has been accepted.\n"
+"\n"
+"Complaint: <b>{reason_complaint}</b>\n"
+"\n"
+"User: <b>{current_profile_name}, {current_profile_age}</b>"
+
+#: handlers/users/send_message_answer.py:628
+#: handlers/users/send_message_answer_just_play.py:654
+msgid ""
+"Есть взаимная симпатия! Начинай общаться 👉 {user_send_message_link_username}"
+msgstr "There is mutual sympathy! Start chatting 👉 {user_liked_link_username}"
+
+#: handlers/users/send_message_answer.py:646
+#: handlers/users/send_message_answer_just_play.py:672
+msgid ""
+"Твоя анкета понравилась {count_users_send_message_for_text} пользователю, "
+"показать его?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did the user like your profile {count_users_send_message}, show it?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/send_message_answer.py:651
+#: handlers/users/send_message_answer_just_play.py:677
+msgid ""
+"Твоя анкета понравилась {count_users_send_message_for_text} пользователю, "
+"показать их?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did the user like your profile {count_users_send_message}, show them?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/send_message_answer.py:656
+#: handlers/users/send_message_answer_just_play.py:682
+msgid ""
+"Твоя анкета понравилась {count_users_send_message_for_text} пользователям, "
+"показать их?\n"
+"\n"
+"1. Показать.\n"
+"2. Не хочу больше никого смотреть."
+msgstr ""
+"Did {count_users_send_message} users like your profile, show them?\n"
+"\n"
+"1. Show.\n"
+"2. I don’t want to watch anyone else."
+
+#: handlers/users/send_message_answer_just_play.py:61
+#: handlers/users/send_message_answer_just_play.py:212
+#: handlers/users/send_message_answer_just_play.py:310
+#: handlers/users/send_message_answer_just_play.py:407
+#: handlers/users/send_message_answer_just_play.py:479
+#: handlers/users/send_message_answer_just_play.py:581
+#: handlers/users/zzz_just_play_second_user.py:172
+msgid ""
+"Кому-то понравилась твоя анкета:\n"
+"\n"
+"Возраст: {current_profile.age}\n"
+"Пол: {current_profile.gender}\n"
+"О себе: {current_profile.about_yourself}\n"
+"Играет в: {games}\n"
+"Уровень игры: {current_profile.play_level}\n"
+"К/Д: {current_profile.cool_down}\n"
+"\n"
+"Письмо: <b>{current_profile.send_message_text}</b>"
+msgstr ""
+"Someone liked your profile:\n"
+"\n"
+"Age: {current_profile.age}\n"
+"Gender: {current_profile.gender}\n"
+"About yourself: {current_profile.about_yourself}\n"
+"He play games: {games}\n"
+"Game level: {current_profile.play_level}\n"
+"C/D: {current_profile.cool_down}\n"
+"\n"
+"Message: <b>{current_profile.send_message_text}</b>"
+
+#: handlers/users/send_message_answer_just_play.py:71
+#: handlers/users/send_message_answer_just_play.py:222
+#: handlers/users/send_message_answer_just_play.py:320
+#: handlers/users/send_message_answer_just_play.py:417
+#: handlers/users/send_message_answer_just_play.py:591
+#: handlers/users/zzz_just_play_second_user.py:182
+msgid ""
+"Кому-то понравилась твоя анкета (и ещё {count_users_send_message_for_text})\n"
+"\n"
+"Возраст: {current_profile.age}\n"
+"Пол: {current_profile.gender}\n"
+"О себе: {current_profile.about_yourself}\n"
+"Играет в: {games}\n"
+"Уровень игры: {current_profile.play_level}\n"
+"К/Д: {current_profile.cool_down}\n"
+"\n"
+"Письмо: <b>{current_profile.send_message_text}</b>"
+msgstr ""
+"Someone liked your profile: (and some {count_users_send_message_for_text})\n"
+"\n"
+"Age: {current_profile.age}\n"
+"Gender: {current_profile.gender}\n"
+"About yourself: {current_profile.about_yourself}\n"
+"He play games: {games}\n"
+"Game level: {current_profile.play_level}\n"
+"C/D: {current_profile.cool_down}\n"
+"\n"
+"Message: <b>{current_profile.send_message_text}</b>"
+
+#: handlers/users/send_message_answer_just_play.py:489
+msgid ""
+"Кому-то понравилась твоя анкета (и ещё {count_users_send_message_for_text + 1})\n"
+"\n"
+"Возраст: {current_profile.age}\n"
+"Пол: {current_profile.gender}\n"
+"О себе: {current_profile.about_yourself}\n"
+"Играет в: {games}\n"
+"Уровень игры: {current_profile.play_level}\n"
+"К/Д: {current_profile.cool_down}\n"
+"\n"
+"Письмо: <b>{current_profile.send_message_text}</b>"
+msgstr ""
+"Someone liked your profile: (and some {count_users_send_message_for_text + 1})\n"
+"\n"
+"Age: {current_profile.age}\n"
+"Gender: {current_profile.gender}\n"
+"About yourself: {current_profile.about_yourself}\n"
+"He play games: {games}\n"
+"Game level: {current_profile.play_level}\n"
+"C/D: {current_profile.cool_down}\n"
+"\n"
+"Message: <b>{current_profile.send_message_text}</b>"
+
+#: handlers/users/start.py:32
+msgid ""
+"Данный бот создан энтузиастами, у нас нету многолетнего опыта в программирование "
+"и создание ботов - мы просто любим игры и хотели бы найти кого-то из наших "
+"городов. В боте никогда не придется платить, что бы увидеть кто вам поставил "
+"лайк и найти взаимную симпатию, все будет абсолютно бесплатно и ограничиваться "
+"только железом что бы не было спамеров, но за это будем у вас просить поддержать "
+"наши “возможных” будущих спонсоров и возможно будем держаться на донатах! На "
+"данный момент лучшей поддержкой для нас будет заказать буст у @boost_ace"
+msgstr ""
+"This bot was created by enthusiasts, we don’t have many years of experience in "
+"programming and creating bots - we just love games and would like to find "
+"someone from our cities. You will never have to pay in the bot to see who gave "
+"you a like and find mutual sympathy, everything will be absolutely free and "
+"limited only to hardware so that there are no spammers, but for this we will ask "
+"you to support our «possible» future sponsors and maybe we will keep on donates! "
+"At the moment, the best support for us will be to order a boost from @boost_ace"
+
+#: handlers/users/start.py:43
+msgid "Хорошо"
+msgstr "Good"
+
+#: handlers/users/users_info.py:40
+msgid "⛔ ️ВАМ ЗАПРЕЩЕНО ПОЛЬЗОВАТЬСЯ ДАННЫМ БОТОМ⛔️ "
+msgstr "⛔ ️YOU ARE NOT ALLOWED TO USE THIS BOT ⛔️"
+
+#: handlers/users/zzz.py:34
+msgid ""
+"{current_profile.name}, {current_profile.age} из {current_profile.country}\n"
+"Хобби: <b>{current_profile.hobby}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>"
+msgstr ""
+"Someone liked your profile:\n"
+"\n"
+"{current_profile.name}, {current_profile.age} from {current_profile.country}\n"
+"Hobby: <b>{current_profile.hobby}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games}</b>"
+
+#: handlers/users/zzz_just_play.py:34
+msgid ""
+"Возраст: <b>{current_profile.age}</b>\n"
+"Пол: <b>{current_profile.gender}</b>\n"
+"Цель: <b>{current_profile.purpose}</b>\n"
+"Уровень игры: <b>{current_profile.play_level}</b>\n"
+"К/Д: <b>{current_profile.cool_down}</b>\n"
+"О себе: <b>{current_profile.about_yourself}</b>\n"
+"Играет в игры: <b>{games}</b>"
+msgstr ""
+"Age: <b>{current_profile.age}</b>\n"
+"Gender: <b>{current_profile.gender}</b>\n"
+"Purpose: <b>{current_profile.purpose}</b>\n"
+"Game level: <b>{current_profile.play_level}</b>\n"
+"C/D: <b>{current_profile.cool_down}</b>\n"
+"About yourself: <b>{current_profile.about_yourself}</b>\n"
+"He play games: <b>{games_current_profile}</b>"
+
+#: handlers/users/zzz_just_play_second_user.py:89
+#: handlers/users/zzz_just_play_second_user.py:217
+msgid ""
+"Возраст: <b>{second_user.age}</b>\n"
+"Пол: <b>{second_user.gender}</b>\n"
+"Цель: <b>{second_user.purpose}</b>\n"
+"Страна поиска: <b>{second_user.country}</b>\n"
+"О себе: <b>{second_user.about_yourself}</b>\n"
+"В какие игры играю: <b>{games}</b>\n"
+"Уровень игры: <b>{second_user.play_level}</b>\n"
+"Ваш К/Д: <b>{second_user.cool_down}</b>"
+msgstr ""
+"Age: <b>{second_user.age}</b>\n"
+"Gender: <b>{second_user.gender}</b>\n"
+"Purpose: <b>{second_user.purpose}</b>\n"
+"Search country: <b>{second_user.country}</b>\n"
+"About yourself: <b>{second_user.about_yourself}</b>\n"
+"What games do I play: <b>{games}</b>\n"
+"Game level: <b>{second_user.play_level}</b>\n"
+"C/D: <b>{second_user.cool_down}</b>"
+
+#: handlers/users/zzz_second_user.py:85 handlers/users/zzz_second_user.py:211
+msgid ""
+"Имя: <b>{second_user.name}</b>\n"
+"Возраст: <b>{second_user.age}</b>\n"
+"Пол: <b>{second_user.gender}</b>\n"
+"Ищу: <b>{second_user.purpose}</b>\n"
+"Кого ищу: <b>{second_user.who_search}</b>\n"
+"Страна: <b>{second_user.country}</b>\n"
+"Город: <b>{second_user.city}</b>\n"
+"О себе: <b>{second_user.about_yourself}</b>\n"
+"Хобби: <b>{second_user.hobby}</b>\n"
+"В какие игры играю: <b>{games}</b>"
+msgstr ""
+"Name: <b>{second_user.name}</b>\n"
+"Age: <b>{second_user.age}</b>\n"
+"Gender: <b>{second_user.gender}</b>\n"
+"Search: <b>{second_user.purpose}</b>\n"
+"Who I Search: <b>{second_user.who_search}</b>\n"
+"County: <b>{second_user.country}</b>\n"
+"City: <b>{second_user.city}</b>\n"
+"About yourself: <b>{second_user.about_yourself}</b>\n"
+"Hobby: <b>{second_user.hobby}</b>\n"
+"What games do I play: <b>{games}</b>"
+
+#: keyboards/inline/gaming_keyboards.py:17
+msgid "Продолжить"
+msgstr "Continue"
+
+#: keyboards/inline/gaming_keyboards.py:41 keyboards/inline/gaming_keyboards.py:48
+msgid "Просто поиграть"
+msgstr "Just play"
+
+#: keyboards/inline/gaming_keyboards.py:46
+msgid "Человека в реальной жизни"
+msgstr "People in real life"
+
+#: keyboards/inline/gaming_keyboards.py:47
+msgid "Команду для праков"
+msgstr "A team for practitioners"
+
+#: keyboards/inline/gaming_keyboards.py:59
+msgid "Парень"
+msgstr "Guy"
+
+#: keyboards/inline/gaming_keyboards.py:60
+msgid "Девушка"
+msgstr "Girl"
+
+#: keyboards/inline/gaming_keyboards.py:71
+msgid "Парней"
+msgstr "Guys "
+
+#: keyboards/inline/gaming_keyboards.py:72
+msgid "Девушек"
+msgstr "Girls"
+
+#: keyboards/inline/gaming_keyboards.py:73
+msgid "Парней и Девушек"
+msgstr "Guys and girls"
+
+#: keyboards/inline/gaming_keyboards.py:84
+msgid "Да"
+msgstr "Yes"
+
+#: keyboards/inline/gaming_keyboards.py:85
+msgid "Изменить анкету"
+msgstr "Edit profile"
+
+#: keyboards/inline/gaming_keyboards.py:167
+msgid "Страны СНГ"
+msgstr "CIS countries"
+
+#: keyboards/inline/gaming_keyboards.py:168
+msgid "Все страны"
+msgstr "All countries"
+
+#: keyboards/inline/gaming_keyboards.py:179
+msgid "Новичок"
+msgstr "Beginner"
+
+#: keyboards/inline/gaming_keyboards.py:180
+msgid "Средний"
+msgstr "Average"
+
+#: keyboards/inline/gaming_keyboards.py:181
+msgid "Высокий"
+msgstr "Higth"
+
+#: keyboards/inline/gaming_keyboards.py:182
+msgid "Киберспорт"
+msgstr "Esports"
+
+#: keyboards/inline/gaming_keyboards.py:193
+msgid "Ответить"
+msgstr "Answer"
+
+#: keyboards/inline/gaming_keyboards.py:194
+msgid "⚠️ Пожаловаться"
+msgstr "⚠️ Complain"

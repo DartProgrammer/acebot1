@@ -1,11 +1,9 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Command
-from emoji import emojize
 
 from keyboards.inline.gaming_keyboards import complain_keyboard, profile_action_target_keyboard
-from keyboards.inline.gaming_keyboards import ru_button
-from loader import db, dp
+from loader import db, dp, _
 from utils.db_api import models
 
 
@@ -21,35 +19,18 @@ async def command_complain(message: types.Message, state: FSMContext):
         user: models.User = await db.get_user(user_id)
         await state.update_data(user_=user)
 
-    language = user.language
-
     # Если пользователь нажал "Пожаловаться", не просматривая анкеты
     if profiles is None:
-        # Если текущий язык пользователя Русский
-        if language == ru_button.text:
-            await message.answer('Жалобу можно оставить только при просмотре анкеты')
-
-        # Если текущий язык пользователя Английский
-        else:
-            await message.answer('You can leave a complaint only when viewing the profile')
+        await message.answer(_('Жалобу можно оставить только при просмотре анкеты'))
 
     # Если пользователь нажал "Пожаловаться", просматривая анкеты
     else:
-        if language == ru_button.text:
-            await message.answer(f'Укажите причину жалобы:\n\n'
-                                 f'1. {emojize(":no_one_under_eighteen:")} Материал для взрослых\n'
-                                 f'2. {emojize(":shopping_cart:")} Продажа товаров и услуг\n'
-                                 f'3. {emojize(":muted_speaker:")} Не отвечает\n'
-                                 f'4. {emojize(":red_question_mark:")} Другое\n'
-                                 f'5. {emojize(":multiply:")} Отмена\n', reply_markup=complain_keyboard)
-
-        else:
-            await message.answer(f'Specify the reason for the complaint:\n\n'
-                                 f'1. {emojize(":no_one_under_eighteen:")} Adult material\n'
-                                 f'2. {emojize(":shopping_cart:")} Sale of goods and services\n'
-                                 f'3. {emojize(":muted_speaker:")} Not responding\n'
-                                 f'4. {emojize(":red_question_mark:")} Other\n'
-                                 f'5. {emojize(":multiply:")} Cancel\n', reply_markup=complain_keyboard)
+        await message.answer(_('Укажите причину жалобы:\n\n'
+                               '1. 🔞 Материал для взрослых\n'
+                               '2. 🛒 Продажа товаров и услуг\n'
+                               '3. 🔇 Не отвечает\n'
+                               '4. ❓ Другое\n'
+                               '5. ✖️ Отмена\n'), reply_markup=complain_keyboard)
 
         await state.set_state('reason_complaint')
 
@@ -59,7 +40,6 @@ async def command_complain(message: types.Message, state: FSMContext):
 async def reason_complaint_handler(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('user_')
-    language = user.language
     profiles = data.get('profiles')
     count_profiles = data.get('count_profiles')
     current_profile_number = data.get('current_profile_number')
@@ -92,14 +72,11 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             await db.add_complaint_for_profile(complaint_profile_id=current_profile.user_id,
                                                reason_complaint=reason_complaint)
 
-        if language == ru_button.text:
-            await message.answer(f'Ваша жалоба принята.\n\n'
-                                 f'Жалоба: <b>Материал для взрослых</b>\n\n'
-                                 f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
-        else:
-            await message.answer(f'Your complaint has been accepted.\n\n'
-                                 f'Complaint: <b>Adult material</b>\n\n'
-                                 f'User: <b>{current_profile.name}, {current_profile.age}</b>')
+        text = _('Ваша жалоба принята.\n\n'
+                 'Жалоба: <b>Материал для взрослых</b>\n\n'
+                 'Пользователь: <b>{current_profile_name}, {current_profile_age}</b>').format(
+            current_profile_name=current_profile.name, current_profile_age=current_profile.age)
+        await message.answer(text)
 
         # Проверяем, есть ли еще анкеты для показа
         if current_profile_number + 1 < count_profiles:
@@ -116,13 +93,8 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 
         # Если закончились анкеты
         else:
-            if language == ru_button.text:
-                await message.answer('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
-                                     'Попробуйте возобновить поиск позднее или измените критерии поиска.')
-
-            else:
-                await message.answer('Unfortunately, the profiles that fit your search criteria are over!\n'
-                                     'Try resuming the search later or change the search criteria.')
+            await message.answer(_('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
+                                   'Попробуйте возобновить поиск позднее или измените критерии поиска.'))
 
             await state.reset_state()
 
@@ -151,14 +123,11 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             await db.add_complaint_for_profile(complaint_profile_id=current_profile.user_id,
                                                reason_complaint=reason_complaint)
 
-        if language == ru_button.text:
-            await message.answer(f'Ваша жалоба принята.\n\n'
-                                 f'Жалоба: <b>Продажа товаров и услуг</b>\n\n'
-                                 f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
-        else:
-            await message.answer(f'Your complaint has been accepted.\n\n'
-                                 f'Complaint: <b>Sale of goods and services</b>\n\n'
-                                 f'User: <b>{current_profile.name}, {current_profile.age}</b>')
+        text = _('Ваша жалоба принята.\n\n'
+                 'Жалоба: <b>Материал для взрослых</b>\n\n'
+                 'Пользователь: <b>{current_profile_name}, {current_profile_age}</b>').format(
+            current_profile_name=current_profile.name, current_profile_age=current_profile.age)
+        await message.answer(text)
 
         # Проверяем, есть ли еще анкеты для показа
         if current_profile_number + 1 < count_profiles:
@@ -175,13 +144,8 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 
         # Если закончились анкеты
         else:
-            if language == ru_button.text:
-                await message.answer('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
-                                     'Попробуйте возобновить поиск позднее или измените критерии поиска.')
-
-            else:
-                await message.answer('Unfortunately, the profiles that fit your search criteria are over!\n'
-                                     'Try resuming the search later or change the search criteria.')
+            await message.answer(_('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
+                                   'Попробуйте возобновить поиск позднее или измените критерии поиска.'))
 
             await state.reset_state()
 
@@ -210,14 +174,11 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
             await db.add_complaint_for_profile(complaint_profile_id=current_profile.user_id,
                                                reason_complaint=reason_complaint)
 
-        if language == ru_button.text:
-            await message.answer(f'Ваша жалоба принята.\n\n'
-                                 f'Жалоба: <b>Не отвечает</b>\n\n'
-                                 f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
-        else:
-            await message.answer(f'Your complaint has been accepted.\n\n'
-                                 f'Complaint: <b>Not responding</b>\n\n'
-                                 f'User: <b>{current_profile.name}, {current_profile.age}</b>')
+        text = _('Ваша жалоба принята.\n\n'
+                 'Жалоба: <b>Материал для взрослых</b>\n\n'
+                 'Пользователь: <b>{current_profile_name}, {current_profile_age}</b>').format(
+            current_profile_name=current_profile.name, current_profile_age=current_profile.age)
+        await message.answer(text)
 
         # Проверяем, есть ли еще анкеты для показа
         if current_profile_number + 1 < count_profiles:
@@ -234,24 +195,15 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 
         # Если закончились анкеты
         else:
-            if language == ru_button.text:
-                await message.answer('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
-                                     'Попробуйте возобновить поиск позднее или измените критерии поиска.')
-
-            else:
-                await message.answer('Unfortunately, the profiles that fit your search criteria are over!\n'
-                                     'Try resuming the search later or change the search criteria.')
+            await message.answer(_('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
+                                   'Попробуйте возобновить поиск позднее или измените критерии поиска.'))
 
             await state.reset_state()
 
     # Пользователь указал причину жалобы "Другое"
     elif option == '❓ 4':
 
-        if language == ru_button.text:
-            await message.answer('Напишите причину жалобы')
-        else:
-            await message.answer('Write the reason for the complaint')
-
+        await message.answer(_('Напишите причину жалобы'))
         await state.set_state('other_complaint')
 
     # Пользователь нажал "Отмена"
@@ -264,7 +216,7 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 
     # Пользователь написал сообщение (не нажал ни одну из кнопок)
     else:
-        await message.answer('Не знаю такой символ')
+        await message.answer(_('Не знаю такой символ'))
 
 
 # Получаем причину жалобы от пользователя, когда он выбрал вариант "Другое"
@@ -272,7 +224,6 @@ async def reason_complaint_handler(message: types.Message, state: FSMContext):
 async def get_other_complaint(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('user_')
-    language = user.language
     profiles = data.get('profiles')
     count_profiles = data.get('count_profiles')
     current_profile_number = data.get('current_profile_number')
@@ -301,14 +252,12 @@ async def get_other_complaint(message: types.Message, state: FSMContext):
         await db.add_complaint_for_profile(complaint_profile_id=current_profile.user_id,
                                            reason_complaint=reason_complaint)
 
-    if language == ru_button.text:
-        await message.answer(f'Ваша жалоба принята.\n\n'
-                             f'Жалоба: <b>{reason_complaint}</b>\n\n'
-                             f'Пользователь: <b>{current_profile.name}, {current_profile.age}</b>')
-    else:
-        await message.answer(f'Your complaint has been accepted.\n\n'
-                             f'Complaint: <b>{reason_complaint}</b>\n\n'
-                             f'User: <b>{current_profile.name}, {current_profile.age}</b>')
+    text = _('Ваша жалоба принята.\n\n'
+             'Жалоба: <b>{reason_complaint}</b>\n\n'
+             'Пользователь: <b>{current_profile_name}, {current_profile_age}</b>').format(
+        reason_complaint=reason_complaint, current_profile_name=current_profile.name,
+        current_profile_age=current_profile.age)
+    await message.answer(text)
 
     # Проверяем, есть ли еще анкеты для показа
     if current_profile_number + 1 < count_profiles:
@@ -325,12 +274,7 @@ async def get_other_complaint(message: types.Message, state: FSMContext):
 
     # Если закончились анкеты
     else:
-        if language == ru_button.text:
-            await message.answer('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
-                                 'Попробуйте возобновить поиск позднее или измените критерии поиска.')
-
-        else:
-            await message.answer('Unfortunately, the profiles that fit your search criteria are over!\n'
-                                 'Try resuming the search later or change the search criteria.')
+        await message.answer(_('К сожалению, профили, подходящие под ваши критерии поиска, закончились!\n'
+                               'Попробуйте возобновить поиск позднее или измените критерии поиска.'))
 
         await state.reset_state()

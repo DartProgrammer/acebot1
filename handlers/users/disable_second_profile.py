@@ -1,10 +1,9 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
-from emoji import emojize
 
 from keyboards.inline.gaming_keyboards import menu_my_profile_keyboard
-from loader import dp
+from loader import dp, _
 from utils.db_api import models
 
 
@@ -14,87 +13,44 @@ from utils.db_api import models
 async def disable_profile_handler(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('second_user')
-    language = user.language
     option = message.text
 
-    # Если текущий язык пользователя Русский
-    if language == '🇷🇺 Русский':
+    # Если пользователь выбрал вариант 1 "Да, отключить анкету"
+    if option == '1':
 
-        # Если пользователь выбрал вариант 1 "Да, отключить анкету"
-        if option == '1':
+        # Устанавливаем признак "Не активен" для профиля пользователя
+        await user.update(enable=False).apply()
 
-            # Устанавливаем признак "Не активен" для профиля пользователя
-            await user.update(enable=False).apply()
+        await message.answer(_('Надеюсь, ты нашел кого-то благодаря мне! '
+                               'Рад был с тобой пообщаться, будет скучно – пиши, '
+                               'обязательно найдем тебе кого-нибудь 😉\n\n'
+                               '1. Смотреть анкеты'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text=_('Смотреть анкеты'))
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
-            await message.answer(f'Надеюсь, ты нашел кого-то благодаря мне! '
-                                 f'Рад был с тобой пообщаться, будет скучно – пиши, '
-                                 f'обязательно найдем тебе кого-нибудь {emojize(":winking_face:")}\n\n'
-                                 f'1. Смотреть анкеты',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Смотреть анкеты')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await state.set_state('disable_second_profile_true')
 
-            await state.set_state('disable_second_profile_true')
+    # Если пользователь выбрал вариант 2 "Нет, вернуться назад"
+    elif option == '2':
+        await message.answer(_('1. Показать профили, которым я нравлюсь\n'
+                               '2. Моя анкета\n'
+                               '3. Я больше не хочу никого искать'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text='1'),
+                                     KeyboardButton(text='2'),
+                                     KeyboardButton(text='3'),
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
-        # Если пользователь выбрал вариант 2 "Нет, вернуться назад"
-        elif option == '2':
-            await message.answer('1. Показать профили, которым я нравлюсь\n'
-                                 '2. Моя анкета\n'
-                                 '3. Я больше не хочу никого искать',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='1'),
-                                         KeyboardButton(text='2'),
-                                         KeyboardButton(text='3'),
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await state.set_state('zzz_second_user')
 
-            await state.set_state('zzz_second_user')
-
-        # Если пользователь не выбрал вариант, а что-то написал
-        else:
-            await message.answer('Нет такого варианта ответа')
-
-    # Если текущий язык пользователя Английский
+    # Если пользователь не выбрал вариант, а что-то написал
     else:
-        # Если пользователь выбрал вариант 1 "Yes, disable the profile"
-        if option == '1':
-
-            # Устанавливаем признак "Не активен" для профиля пользователя
-            await user.update(enable=False).apply()
-
-            await message.answer(f'I hope you found someone thanks to me! I was glad to talk to you, '
-                                 f'it will be boring - write, we will definitely find someone for you '
-                                 f'{emojize(":winking_face:")}\n\n'
-                                 f'1. View profiles',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='View profiles')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-
-            await state.set_state('disable_second_profile_true')
-
-        # Если пользователь выбрал вариант 2 "No, go back"
-        elif option == '2':
-            await message.answer("1. Show profiles that like me\n"
-                                 "2. My profile\n"
-                                 "3. I don't want to look for anyone anymore",
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='1'),
-                                         KeyboardButton(text='2'),
-                                         KeyboardButton(text='3'),
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-
-            await state.set_state('zzz_second_user')
-
-        # Если пользователь не выбрал вариант, а что-то написал
-        else:
-            await message.answer('There is no such answer option')
+        await message.answer(_('Нет такого варианта ответа'))
 
 
 # Попадаем сюда, когда пользователь выбрал вариант "Я больше не хочу никого искать"
@@ -103,87 +59,44 @@ async def disable_profile_handler(message: types.Message, state: FSMContext):
 async def disable_profile_handler(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('second_user')
-    language = user.language
     option = message.text
 
-    # Если текущий язык пользователя Русский
-    if language == '🇷🇺 Русский':
+    # Если пользователь выбрал вариант 1 "Да, отключить анкету"
+    if option == '1':
 
-        # Если пользователь выбрал вариант 1 "Да, отключить анкету"
-        if option == '1':
+        # Устанавливаем признак "Не активен" для профиля пользователя
+        await user.update(enable=False).apply()
 
-            # Устанавливаем признак "Не активен" для профиля пользователя
-            await user.update(enable=False).apply()
+        await message.answer(_('Надеюсь, ты нашел кого-то благодаря мне! '
+                               'Рад был с тобой пообщаться, будет скучно – пиши, '
+                               'обязательно найдем тебе кого-нибудь 😉\n\n'
+                               '1. Смотреть анкеты'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text=_('Смотреть анкеты'))
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
-            await message.answer(f'Надеюсь, ты нашел кого-то благодаря мне! '
-                                 f'Рад был с тобой пообщаться, будет скучно – пиши, '
-                                 f'обязательно найдем тебе кого-нибудь {emojize(":winking_face:")}\n\n'
-                                 f'1. Смотреть анкеты',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Смотреть анкеты')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await state.set_state('disable_second_profile_true')
 
-            await state.set_state('disable_second_profile_true')
+    # Если пользователь выбрал вариант 2 "Нет, вернуться назад"
+    elif option == '2':
+        await message.answer(_('1. Показать профили, которым я нравлюсь\n'
+                               '2. Моя анкета\n'
+                               '3. Я больше не хочу никого искать'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text='1'),
+                                     KeyboardButton(text='2'),
+                                     KeyboardButton(text='3'),
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
-        # Если пользователь выбрал вариант 2 "Нет, вернуться назад"
-        elif option == '2':
-            await message.answer('1. Показать профили, которым я нравлюсь\n'
-                                 '2. Моя анкета\n'
-                                 '3. Я больше не хочу никого искать',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='1'),
-                                         KeyboardButton(text='2'),
-                                         KeyboardButton(text='3'),
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await state.set_state('zzz_second_user_send_message')
 
-            await state.set_state('zzz_second_user_send_message')
-
-        # Если пользователь не выбрал вариант, а что-то написал
-        else:
-            await message.answer('Нет такого варианта ответа')
-
-    # Если текущий язык пользователя Английский
+    # Если пользователь не выбрал вариант, а что-то написал
     else:
-        # Если пользователь выбрал вариант 1 "Yes, disable the profile"
-        if option == '1':
-
-            # Устанавливаем признак "Не активен" для профиля пользователя
-            await user.update(enable=False).apply()
-
-            await message.answer(f'I hope you found someone thanks to me! I was glad to talk to you, '
-                                 f'it will be boring - write, we will definitely find someone for you '
-                                 f'{emojize(":winking_face:")}\n\n'
-                                 f'1. View profiles',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='View profiles')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-
-            await state.set_state('disable_second_profile_true')
-
-        # Если пользователь выбрал вариант 2 "No, go back"
-        elif option == '2':
-            await message.answer("1. Show profiles that like me\n"
-                                 "2. My profile\n"
-                                 "3. I don't want to look for anyone anymore",
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='1'),
-                                         KeyboardButton(text='2'),
-                                         KeyboardButton(text='3'),
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-
-            await state.set_state('zzz_second_user_send_message')
-
-        # Если пользователь не выбрал вариант, а что-то написал
-        else:
-            await message.answer('There is no such answer option')
+        await message.answer(_('Нет такого варианта ответа'))
 
 
 # Попадаем сюда, если пользователь вновь захотел активировать свой профиль и нажал "Смотреть анкеты"
@@ -192,7 +105,6 @@ async def disable_profile_handler(message: types.Message, state: FSMContext):
 async def enable_profile(message: types.Message, state: FSMContext):
     data = await state.get_data()
     user: models.User = data.get('second_user')
-    language = user.language
     photo = user.photo
     game1 = user.game1
     game2 = user.game2
@@ -208,58 +120,31 @@ async def enable_profile(message: types.Message, state: FSMContext):
 
     # Устанавливаем признак "Активен" для профиля пользователя
     await user.update(enable=True).apply()
+    text = _('Имя: <b>{name}</b>\n'
+             'Возраст: <b>{age}</b>\n'
+             'Пол: <b>{gender}</b>\n'
+             'Ищу: <b>{purpose}</b>\n'
+             'Кого ищу: <b>{who_search}</b>\n'
+             'Страна: <b>{country}</b>\n'
+             'Город: <b>{city}</b>\n'
+             'О себе: <b>{about_yourself}</b>\n'
+             'Хобби: <b>{hobby}</b>\n'
+             'В какие игры играю: <b>{games}</b>').format(name=user.name, age=user.age, gender=user.gender,
+                                                          purpose=user.purpose, who_search=user.who_search,
+                                                          country=user.country, about_yourself=user.about_yourself,
+                                                          hobby=user.hobby, games=games)
 
-    # Если текущий язык пользователя Русский
-    if language == '🇷🇺 Русский':
+    await message.answer('Ваш профиль:')
 
-        text_ru = f'Имя: <b>{user.name}</b>\n' \
-                  f'Возраст: <b>{user.age}</b>\n' \
-                  f'Пол: <b>{user.gender}</b>\n' \
-                  f'Ищу: <b>{user.purpose}</b>\n' \
-                  f'Кого ищу: <b>{user.who_search}</b>\n' \
-                  f'Страна: <b>{user.country}</b>\n' \
-                  f'Город: <b>{user.city}</b>\n' \
-                  f'О себе: <b>{user.about_yourself}</b>\n' \
-                  f'Хобби: <b>{user.hobby}</b>\n' \
-                  f'В какие игры играю: <b>{games}</b>'
-
-        await message.answer('Ваш профиль:')
-
-        if photo == 'None':
-            await message.answer(text=text_ru)
-        else:
-            await message.answer_photo(photo=user.photo, caption=text_ru)
-
-        await message.answer(text='1. Заполнить анкету заново\n'
-                                  '2. Изменить фото\n'
-                                  '3. Изменить текст анкеты\n'
-                                  '4. Смотреть анкеты', reply_markup=menu_my_profile_keyboard)
-
-    # Если текущий язык пользователя Английский
+    if photo == 'None':
+        await message.answer(text=text)
     else:
+        await message.answer_photo(photo=user.photo, caption=text)
 
-        text_en = f'Name: <b>{user.name}</b>\n' \
-                  f'Age: <b>{user.age}</b>\n' \
-                  f'Gender: <b>{user.gender}</b>\n' \
-                  f'Search: <b>{user.purpose}</b>\n' \
-                  f'Who search: <b>{user.who_search}</b>\n' \
-                  f'Country: <b>{user.country}</b>\n' \
-                  f'City: <b>{user.city}</b>\n' \
-                  f'About yourself: <b>{user.about_yourself}</b>\n' \
-                  f'Hobby: <b>{user.hobby}</b>\n' \
-                  f'Playing games: <b>{games}</b>'
-
-        await message.answer('Your profile:')
-
-        if photo == 'None':
-            await message.answer(text=text_en)
-        else:
-            await message.answer_photo(photo=user.photo, caption=text_en)
-
-        await message.answer(text='1. Edit my profile\n'
-                                  '2. Change my photo\n'
-                                  '3. Change profile text\n'
-                                  '4. View profiles', reply_markup=menu_my_profile_keyboard)
+    await message.answer(text=_('1. Заполнить анкету заново\n'
+                                '2. Изменить фото\n'
+                                '3. Изменить текст анкеты\n'
+                                '4. Смотреть анкеты'), reply_markup=menu_my_profile_keyboard)
 
     await state.update_data(user_=user)
     await state.set_state('my_profile_state')

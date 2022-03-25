@@ -1,22 +1,22 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.utils.callback_data import CallbackData
 from emoji import emojize
+from loader import _
 
 # Клавиатура для выбора языка меню
-language_keyboard = ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+language_callback = CallbackData('language', 'code')
+language_keyboard = InlineKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-ru_button = KeyboardButton(text=f'{emojize(":Russia:")} Русский')
-en_button = KeyboardButton(text=f'{emojize(":United_Kingdom:")} English')
+ru_button = InlineKeyboardButton(text=f'🇷🇺 Русский', callback_data=language_callback.new(code='ru'))
+en_button = InlineKeyboardButton(text=f'🇺🇸 English', callback_data=language_callback.new(code='en'))
 
 language_keyboard.add(ru_button, en_button)
 
 
 # Клавиатура для выбора игр
-def show_games_keyboard(language, game1=None, game2=None):
+def show_games_keyboard(game1=None, game2=None):
     games_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-    if language == ru_button.text:
-        continue_btn = KeyboardButton(text='Продолжить')
-    else:
-        continue_btn = KeyboardButton(text='Continue')
+    continue_btn = KeyboardButton(text=_('Продолжить'))
 
     if game1 is None:
         pubg_mobile_btn = KeyboardButton(text='PUBG MOBILE')
@@ -36,48 +36,30 @@ def show_games_keyboard(language, game1=None, game2=None):
 
 
 # Клавиатура для выбора вариантов, что ищет пользователь
-def show_looking_for_keyboard(language, age):
+def show_looking_for_keyboard(age):
     looking_for_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == ru_button.text:
-        if 9 < age < 12:
-            just_play_btn = KeyboardButton(text='Просто поиграть')
+    if 9 < age < 12:
+        just_play_btn = KeyboardButton(text=_('Просто поиграть'))
 
-            looking_for_keyboard.add(just_play_btn)
-
-        else:
-            person_real_life_btn = KeyboardButton(text='Человека в реальной жизни')
-            practitioners_team_btn = KeyboardButton(text='Команду для праков')
-            just_play_btn = KeyboardButton(text='Просто поиграть')
-
-            looking_for_keyboard.add(person_real_life_btn, just_play_btn, practitioners_team_btn)
+        looking_for_keyboard.add(just_play_btn)
 
     else:
-        if 9 < age < 12:
-            just_play_btn = KeyboardButton(text='Just to play')
+        person_real_life_btn = KeyboardButton(text=_('Человека в реальной жизни'))
+        practitioners_team_btn = KeyboardButton(text=_('Команду для праков'))
+        just_play_btn = KeyboardButton(text=_('Просто поиграть'))
 
-            looking_for_keyboard.add(just_play_btn)
-
-        else:
-            person_real_life_btn = KeyboardButton(text='A person in real life')
-            practitioners_team_btn = KeyboardButton(text='A team for practitioners')
-            just_play_btn = KeyboardButton(text='Just to play')
-
-            looking_for_keyboard.add(person_real_life_btn, just_play_btn, practitioners_team_btn)
+        looking_for_keyboard.add(person_real_life_btn, just_play_btn, practitioners_team_btn)
 
     return looking_for_keyboard
 
 
 # Клавиатура для выбора пола
-def show_gender_keyboard(language):
+def show_gender_keyboard():
     gender_keyboard = ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == ru_button.text:
-        guy_btn = KeyboardButton(text=f'Парень')
-        girl_btn = KeyboardButton(text=f'Девушка')
-    else:
-        guy_btn = KeyboardButton(text=f'Guy')
-        girl_btn = KeyboardButton(text=f'Girl')
+    guy_btn = KeyboardButton(text=_('Парень'))
+    girl_btn = KeyboardButton(text=_('Девушка'))
 
     gender_keyboard.add(guy_btn, girl_btn)
 
@@ -85,17 +67,12 @@ def show_gender_keyboard(language):
 
 
 # Клавиатура для выбора, кого ищет пользователь
-def show_who_search_keyboard(language):
+def show_who_search_keyboard():
     who_search_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == ru_button.text:
-        guys_btn = KeyboardButton(text='Парней')
-        girls_btn = KeyboardButton(text='Девушек')
-        guys_girls_btn = KeyboardButton(text='Парней и Девушек')
-    else:
-        guys_btn = KeyboardButton(text='Guys')
-        girls_btn = KeyboardButton(text='Girls')
-        guys_girls_btn = KeyboardButton(text='Guys and Girls')
+    guys_btn = KeyboardButton(text=_('Парней'))
+    girls_btn = KeyboardButton(text=_('Девушек'))
+    guys_girls_btn = KeyboardButton(text=_('Парней и Девушек'))
 
     who_search_keyboard.add(guys_btn, girls_btn, guys_girls_btn)
 
@@ -103,15 +80,11 @@ def show_who_search_keyboard(language):
 
 
 # Клавиатура подтверждения профиля
-def show_correct_profile_keyboard(language):
+def show_correct_profile_keyboard():
     correct_profile_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
 
-    if language == ru_button.text:
-        correct_btn = KeyboardButton(text='Да')
-        cancel_btn = KeyboardButton(text='Изменить анкету')
-    else:
-        correct_btn = KeyboardButton(text='Yes')
-        cancel_btn = KeyboardButton(text='Edit profile')
+    correct_btn = KeyboardButton(text=_('Да'))
+    cancel_btn = KeyboardButton(text=_('Изменить анкету'))
 
     correct_profile_keyboard.add(correct_btn, cancel_btn)
 
@@ -190,15 +163,11 @@ cancel_complain_btn = KeyboardButton(text=f'{emojize(":multiply:")} 5')
 
 
 # Клавиатура для выбора страны teammates
-def get_teammates_country(language):
+def get_teammates_country():
     teammates_country_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
 
-    if language == ru_button.text:
-        cis_countries_btn = KeyboardButton(text='Страны СНГ')
-        all_countries_btn = KeyboardButton(text='Все страны')
-    else:
-        cis_countries_btn = KeyboardButton(text='CIS countries')
-        all_countries_btn = KeyboardButton(text='All countries')
+    cis_countries_btn = KeyboardButton(text=_('Страны СНГ'))
+    all_countries_btn = KeyboardButton(text=_('Все страны'))
 
     teammates_country_keyboard.add(cis_countries_btn, all_countries_btn)
 
@@ -206,19 +175,13 @@ def get_teammates_country(language):
 
 
 # Клавиатура для выбора уровня игры
-def get_level_of_play_keyboard(language):
+def get_level_of_play_keyboard():
     level_of_play_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True, row_width=1)
 
-    if language == ru_button.text:
-        beginner_btn = KeyboardButton(text='Новичок')
-        average_btn = KeyboardButton(text='Средний')
-        high_btn = KeyboardButton(text='Высокий')
-        cyber_sport_btn = KeyboardButton(text='Киберспорт')
-    else:
-        beginner_btn = KeyboardButton(text='Beginner')
-        average_btn = KeyboardButton(text='Average')
-        high_btn = KeyboardButton(text='High')
-        cyber_sport_btn = KeyboardButton(text='Cybersport')
+    beginner_btn = KeyboardButton(text=_('Новичок'))
+    average_btn = KeyboardButton(text=_('Средний'))
+    high_btn = KeyboardButton(text=_('Высокий'))
+    cyber_sport_btn = KeyboardButton(text=_('Киберспорт'))
 
     level_of_play_keyboard.add(beginner_btn, average_btn, high_btn, cyber_sport_btn)
 
@@ -226,15 +189,11 @@ def get_level_of_play_keyboard(language):
 
 
 # Клавиатура для действий при получении письма
-def get_send_message_keyboard(language):
+def get_send_message_keyboard():
     send_message_keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True, row_width=2)
 
-    if language == ru_button.text:
-        answer_btn = KeyboardButton(text='Ответить')
-        complain_btn = KeyboardButton(text=f'{emojize(":warning:")} Пожаловаться')
-    else:
-        answer_btn = KeyboardButton(text='Answer')
-        complain_btn = KeyboardButton(text=f'{emojize(":warning:")} Complain')
+    answer_btn = KeyboardButton(text=_('Ответить'))
+    complain_btn = KeyboardButton(text=_('⚠️ Пожаловаться'))
 
     send_message_keyboard.add(answer_btn, complain_btn)
 

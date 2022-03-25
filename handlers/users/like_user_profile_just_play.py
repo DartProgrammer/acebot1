@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import profile_action_target_keyboard
-from loader import dp, bot, db
+from loader import dp, bot, db, _
 from utils.db_api import models
 
 
@@ -46,47 +46,28 @@ async def show_users_profiles(message: types.Message, state: FSMContext):
     else:
         games = ''
 
-    if language_second_user == '🇷🇺 Русский':
-        # Изменяем текст в зависимости от количества лайков
-        if count_users_liked == 1:
-            text = f'Кому-то понравилась твоя анкета:\n\n' \
-                   f'Возраст: {current_profile.age}\n' \
-                   f'Пол: {current_profile.gender}\n' \
-                   f'О себе: {current_profile.about_yourself}\n' \
-                   f'Играет в: {games}\n' \
-                   f'Уровень игры: {current_profile.play_level}\n' \
-                   f'К/Д: {current_profile.cool_down}'
-        else:
-            text = f'Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n' \
-                   f'Возраст: {current_profile.age}\n' \
-                   f'Пол: {current_profile.gender}\n' \
-                   f'О себе: {current_profile.about_yourself}\n' \
-                   f'Играет в: {games}\n' \
-                   f'Уровень игры: {current_profile.play_level}\n' \
-                   f'К/Д: {current_profile.cool_down}'
-
+    # Изменяем текст в зависимости от количества лайков
+    if count_users_liked == 1:
+        text = _('Кому-то понравилась твоя анкета:\n\n'
+                 'Возраст: {current_profile.age}\n'
+                 'Пол: {current_profile.gender}\n'
+                 'О себе: {current_profile.about_yourself}\n'
+                 'Играет в: {games}\n'
+                 'Уровень игры: {current_profile.play_level}\n'
+                 'К/Д: {current_profile.cool_down}').format(current_profile=current_profile, games=games)
     else:
-        if count_users_liked == 1:
-            text = f'Someone liked your profile:\n\n' \
-                   f'Age: {current_profile.age}\n' \
-                   f'Gender: {current_profile.gender}\n' \
-                   f'About: {current_profile.about_yourself}\n' \
-                   f'Играет в: {games}\n' \
-                   f'Level of play: {current_profile.play_level}\n' \
-                   f'Cool down: {current_profile.cool_down}'
-        else:
-            text = f'Someone liked your profile (and more {count_users_liked_for_text})\n\n' \
-                   f'Age: {current_profile.age}\n' \
-                   f'Gender: {current_profile.gender}\n' \
-                   f'About: {current_profile.about_yourself}\n' \
-                   f'Играет в: {games}\n' \
-                   f'Level of play: {current_profile.play_level}\n' \
-                   f'Cool down: {current_profile.cool_down}'
+        text = _('Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n'
+                 'Возраст: {current_profile.age}\n'
+                 'Пол: {current_profile.gender}\n'
+                 'О себе: {current_profile.about_yourself}\n'
+                 'Играет в: {games}\n'
+                 'Уровень игры: {current_profile.play_level}\n'
+                 'К/Д: {current_profile.cool_down}').format(current_profile=current_profile, games=games,
+                                                            count_users_liked_for_text=count_users_liked_for_text)
 
     # Если пользователь без фото
     if photo == 'None':
         await message.answer(text=text, reply_markup=profile_action_target_keyboard)
-
     # Если пользователь с фото
     else:
         await message.answer_photo(photo=photo, caption=text, reply_markup=profile_action_target_keyboard)
@@ -97,19 +78,12 @@ async def show_users_profiles(message: types.Message, state: FSMContext):
 async def not_show_users_profiles(message: types.Message, state: FSMContext):
     second_user_id = message.from_user.id
     second_user: models.User = await db.get_user(second_user_id)
-    language = second_user.language
     await state.update_data(second_user=second_user)
 
-    if language == '🇷🇺 Русский':
-        text = 'Так ты не узнаешь, что кому-то нравишься... ' \
-               'Точно хочешь отключить свою анкету?\n\n' \
-               '1. Да, отключить анкету.\n' \
-               '2. Нет, вернуться назад.'
-    else:
-        text = "That way you won't know that someone likes you... " \
-               "Are you sure you want to disable your profile?\n\n" \
-               "1. Yes, disable the profile.\n" \
-               "2. No, go back."
+    text = _('Так ты не узнаешь, что кому-то нравишься... '
+             'Точно хочешь отключить свою анкету?\n\n'
+             '1. Да, отключить анкету.\n'
+             '2. Нет, вернуться назад.')
 
     await message.answer(text=text, reply_markup=ReplyKeyboardMarkup(keyboard=[
         [
@@ -144,18 +118,14 @@ async def like_user_profile(message: types.Message, state: FSMContext):
     language_current_profile = current_profile.language
 
     # Отправляем информацию о взаимной симпатии пользователю 2
-    if user_language == '🇷🇺 Русский':
-        await message.answer(f'Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link_username}',
-                             disable_web_page_preview=True)
-    else:
-        await message.answer(f'There is mutual sympathy! Start chatting 👉 {user_liked_link_username}',
-                             disable_web_page_preview=True)
+    await message.answer(_('Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link_username}').format(
+        user_liked_link_username=user_liked_link_username),
+        disable_web_page_preview=True)
 
     # Если пользователь без фото
     if current_profile.photo == 'None':
         await message.answer(text=f'{current_profile.name}, {current_profile.age}, '
                                   f'{current_profile.city} - {current_profile.about_yourself}')
-
     # Если пользователь с фото
     else:
         await message.answer_photo(photo=current_profile.photo,
@@ -163,14 +133,10 @@ async def like_user_profile(message: types.Message, state: FSMContext):
                                            f'{current_profile.city} - {current_profile.about_yourself}')
 
     # Отправляем информацию о взаимной симпатии пользователю 1
-    if language_current_profile == '🇷🇺 Русский':
-        await bot.send_message(chat_id=f'{current_profile_user_id}',
-                               text=f'Есть взаимная симпатия! Начинай общаться 👉 {user_link_username}',
-                               disable_web_page_preview=True)
-    else:
-        await bot.send_message(chat_id=f'{current_profile_user_id}',
-                               text=f'There is mutual sympathy! Start chatting 👉 {user_link_username}',
-                               disable_web_page_preview=True)
+    await bot.send_message(chat_id=f'{current_profile_user_id}',
+                           text=_('Есть взаимная симпатия! Начинай общаться 👉 {user_link_username}').format(
+                               user_link_username=user_link_username),
+                           disable_web_page_preview=True)
 
     await bot.send_photo(chat_id=f'{current_profile_user_id}', photo=f'{second_user.photo}',
                          caption=f'{second_user.name}, {second_user.age}, {second_user.city} - '
@@ -193,42 +159,25 @@ async def like_user_profile(message: types.Message, state: FSMContext):
         else:
             games = ''
 
-        if user_language == '🇷🇺 Русский':
-            # Изменяем текст в зависимости от количества лайков
-            if count_users_liked_for_text == 1:
-                text = f'Кому-то понравилась твоя анкета:\n\n' \
-                       f'Возраст: {current_profile.age}\n' \
-                       f'Пол: {current_profile.gender}\n' \
-                       f'О себе: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Уровень игры: {current_profile.play_level}\n' \
-                       f'К/Д: {current_profile.cool_down}'
-            else:
-                text = f'Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n' \
-                       f'Возраст: {current_profile.age}\n' \
-                       f'Пол: {current_profile.gender}\n' \
-                       f'О себе: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Уровень игры: {current_profile.play_level}\n' \
-                       f'К/Д: {current_profile.cool_down}'
-
+        # Изменяем текст в зависимости от количества лайков
+        if count_users_liked_for_text == 1:
+            text = _('Кому-то понравилась твоя анкета:\n\n'
+                     'Возраст: {current_profile.age}\n'
+                     'Пол: {current_profile.gender}\n'
+                     'О себе: {current_profile.about_yourself}\n'
+                     'Играет в: {games}\n'
+                     'Уровень игры: {current_profile.play_level}\n'
+                     'К/Д: {current_profile.cool_down}').format(current_profile=current_profile, games=games)
         else:
-            if count_users_liked_for_text == 1:
-                text = f'Someone liked your profile:\n\n' \
-                       f'Age: {current_profile.age}\n' \
-                       f'Gender: {current_profile.gender}\n' \
-                       f'About: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Level of play: {current_profile.play_level}\n' \
-                       f'Cool down: {current_profile.cool_down}'
-            else:
-                text = f'Someone liked your profile (and more {count_users_liked_for_text})\n\n' \
-                       f'Age: {current_profile.age}\n' \
-                       f'Gender: {current_profile.gender}\n' \
-                       f'About: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Level of play: {current_profile.play_level}\n' \
-                       f'Cool down: {current_profile.cool_down}'
+            text = _('Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n'
+                     'Возраст: {current_profile.age}\n'
+                     'Пол: {current_profile.gender}\n'
+                     'О себе: {current_profile.about_yourself}\n'
+                     'Играет в: {games}\n'
+                     'Уровень игры: {current_profile.play_level}\n'
+                     'К/Д: {current_profile.cool_down}').format(current_profile=current_profile,
+                                                                count_users_liked_for_text=count_users_liked_for_text,
+                                                                games=games)
 
         # Если пользователь без фото
         if photo == 'None':
@@ -242,22 +191,13 @@ async def like_user_profile(message: types.Message, state: FSMContext):
 
     # Сюда попадаем, когда показали всех пользователей, которым понравилась анкета
     else:
-        if user_language == '🇷🇺 Русский':
-            await message.answer(f'Чтобы получать больше лайков ❤️\n'
-                                 f'Подпишись на канал Ссылка на канал✅',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Продолжить просмотр анкет')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-        else:
-            await message.answer(f'To get more likes ❤️\n'
-                                 f'Subscribe to the channel Link ✅',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Continue viewing profiles')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await message.answer(_('Чтобы получать больше лайков ❤️\n'
+                               'Подпишись на канал Ссылка на канал✅'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text=_('Продолжить просмотр анкет'))
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
         await state.set_state('continue_viewing_profiles')
 
@@ -265,17 +205,7 @@ async def like_user_profile(message: types.Message, state: FSMContext):
 # Если пользователь 2 нажал 💌
 @dp.message_handler(text='💌', state='in_like_just_play')
 async def send_message_profile(message: types.Message, state: FSMContext):
-    data = await state.get_data()
-
-    # Получаем информацию о пользователе
-    second_user: models.User = data.get('second_user')
-    user_language = second_user.language
-
-    if user_language == '🇷🇺 Русский':
-        await message.answer('Напишите сообщение, которое хотите отправить')
-    else:
-        await message.answer('Write the message you want to send')
-
+    await message.answer(_('Напишите сообщение, которое хотите отправить'))
     await state.set_state('in_like_just_play_wait_answer')
 
 
@@ -311,42 +241,25 @@ async def dislike_user_profile(message: types.Message, state: FSMContext):
         else:
             games = ''
 
-        if user_language == '🇷🇺 Русский':
-            # Изменяем текст в зависимости от количества лайков
-            if count_users_liked_for_text == 1:
-                text = f'Кому-то понравилась твоя анкета:\n\n' \
-                       f'Возраст: {current_profile.age}\n' \
-                       f'Пол: {current_profile.gender}\n' \
-                       f'О себе: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Уровень игры: {current_profile.play_level}\n' \
-                       f'К/Д: {current_profile.cool_down}'
-            else:
-                text = f'Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n' \
-                       f'Возраст: {current_profile.age}\n' \
-                       f'Пол: {current_profile.gender}\n' \
-                       f'О себе: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Уровень игры: {current_profile.play_level}\n' \
-                       f'К/Д: {current_profile.cool_down}'
-
+        # Изменяем текст в зависимости от количества лайков
+        if count_users_liked_for_text == 1:
+            text = _('Кому-то понравилась твоя анкета:\n\n'
+                     'Возраст: {current_profile.age}\n'
+                     'Пол: {current_profile.gender}\n'
+                     'О себе: {current_profile.about_yourself}\n'
+                     'Играет в: {games}\n'
+                     'Уровень игры: {current_profile.play_level}\n'
+                     'К/Д: {current_profile.cool_down}').format(current_profile=current_profile, games=games)
         else:
-            if count_users_liked_for_text == 1:
-                text = f'Someone liked your profile:\n\n' \
-                       f'Age: {current_profile.age}\n' \
-                       f'Gender: {current_profile.gender}\n' \
-                       f'About: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Level of play: {current_profile.play_level}\n' \
-                       f'Cool down: {current_profile.cool_down}'
-            else:
-                text = f'Someone liked your profile (and more {count_users_liked_for_text})\n\n' \
-                       f'Age: {current_profile.age}\n' \
-                       f'Gender: {current_profile.gender}\n' \
-                       f'About: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Level of play: {current_profile.play_level}\n' \
-                       f'Cool down: {current_profile.cool_down}'
+            text = _('Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n'
+                     'Возраст: {current_profile.age}\n'
+                     'Пол: {current_profile.gender}\n'
+                     'О себе: {current_profile.about_yourself}\n'
+                     'Играет в: {games}\n'
+                     'Уровень игры: {current_profile.play_level}\n'
+                     'К/Д: {current_profile.cool_down}').format(current_profile=current_profile,
+                                                                count_users_liked_for_text=count_users_liked_for_text,
+                                                                games=games)
 
         # Если пользователь без фото
         if photo == 'None':
@@ -360,22 +273,13 @@ async def dislike_user_profile(message: types.Message, state: FSMContext):
 
     # Сюда попадаем, когда показали всех пользователей, которым понравилась анкета
     else:
-        if user_language == '🇷🇺 Русский':
-            await message.answer(f'Чтобы получать больше лайков ❤️\n'
-                                 f'Подпишись на канал Ссылка на канал✅',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Продолжить просмотр анкет')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-        else:
-            await message.answer(f'To get more likes ❤️\n'
-                                 f'Subscribe to the channel Link ✅',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Continue viewing profiles')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await message.answer(_('Чтобы получать больше лайков ❤️\n'
+                               'Подпишись на канал Ссылка на канал✅'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text=_('Продолжить просмотр анкет'))
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
         await state.set_state('continue_viewing_profiles')
 
@@ -388,7 +292,6 @@ async def send_answer_message(message: types.Message, state: FSMContext):
     # Получаем информацию о пользователе
     second_user: models.User = data.get('second_user')
     user_language = second_user.language
-    # second_user_link = f'<a href="tg://user?id={second_user.user_id}">{second_user.name}</a>'
     second_user_link_username = f'<a href="https://t.me/{second_user.username}">{second_user.name}</a>'
     answer_text = message.text
 
@@ -399,17 +302,12 @@ async def send_answer_message(message: types.Message, state: FSMContext):
     count_users_liked_for_text = data.get('count_users_liked_for_text')
     current_profile: models.User = all_users_liked[current_profile_liked_number]
     current_profile_user_id = current_profile[1]
-    # user_liked_link = f'<a href="tg://user?id={current_profile_user_id}">{current_profile.name}</a>'
     user_liked_link_username = f'<a href="https://t.me/{current_profile.username}">{current_profile.name}</a>'
     language_current_profile = current_profile.language
 
-    # Отправляем информацию о взаимной симпатии пользователю 2
-    if user_language == '🇷🇺 Русский':
-        await message.answer(f'Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link_username}',
-                             disable_web_page_preview=True)
-    else:
-        await message.answer(f'There is mutual sympathy! Start chatting 👉 {user_liked_link_username}',
-                             disable_web_page_preview=True)
+    await message.answer(_('Есть взаимная симпатия! Начинай общаться 👉 {user_liked_link_username}').format(
+        user_liked_link_username=user_liked_link_username),
+        disable_web_page_preview=True)
 
     # Если пользователь 1 без фото
     if current_profile.photo == 'None':
@@ -422,14 +320,10 @@ async def send_answer_message(message: types.Message, state: FSMContext):
                                            f'{current_profile.city} - {current_profile.about_yourself}')
 
     # Отправляем информацию о взаимной симпатии пользователю 1
-    if language_current_profile == '🇷🇺 Русский':
-        await bot.send_message(chat_id=f'{current_profile_user_id}',
-                               text=f'Есть взаимная симпатия! Начинай общаться 👉 {second_user_link_username}',
-                               disable_web_page_preview=True)
-    else:
-        await bot.send_message(chat_id=f'{current_profile_user_id}',
-                               text=f'There is mutual sympathy! Start chatting 👉 {second_user_link_username}',
-                               disable_web_page_preview=True)
+    await bot.send_message(chat_id=f'{current_profile_user_id}',
+                           text=_('Есть взаимная симпатия! Начинай общаться 👉 {second_user_link_username}').format(
+                               second_user_link_username),
+                           disable_web_page_preview=True)
 
     text = f'{second_user.name}, {second_user.age}, {second_user.city} - {second_user.about_yourself}\n\n{answer_text}'
     # Если пользователь 2 без фото
@@ -456,42 +350,23 @@ async def send_answer_message(message: types.Message, state: FSMContext):
         else:
             games = ''
 
-        if user_language == '🇷🇺 Русский':
-            # Изменяем текст в зависимости от количества лайков
-            if count_users_liked_for_text == 1:
-                text = f'Кому-то понравилась твоя анкета:\n\n' \
-                       f'Возраст: {current_profile.age}\n' \
-                       f'Пол: {current_profile.gender}\n' \
-                       f'О себе: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Уровень игры: {current_profile.play_level}\n' \
-                       f'К/Д: {current_profile.cool_down}'
-            else:
-                text = f'Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n' \
-                       f'Возраст: {current_profile.age}\n' \
-                       f'Пол: {current_profile.gender}\n' \
-                       f'О себе: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Уровень игры: {current_profile.play_level}\n' \
-                       f'К/Д: {current_profile.cool_down}'
-
+        # Изменяем текст в зависимости от количества лайков
+        if count_users_liked_for_text == 1:
+            text = _('Кому-то понравилась твоя анкета:\n\n'
+                     'Возраст: {current_profile.age}\n'
+                     'Пол: {current_profile.gender}\n'
+                     'О себе: {current_profile.about_yourself}\n'
+                     'Играет в: {games}\n'
+                     'Уровень игры: {current_profile.play_level}\n'
+                     'К/Д: {current_profile.cool_down}').format(current_profile=current_profile, games=games)
         else:
-            if count_users_liked_for_text == 1:
-                text = f'Someone liked your profile:\n\n' \
-                       f'Age: {current_profile.age}\n' \
-                       f'Gender: {current_profile.gender}\n' \
-                       f'About: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Level of play: {current_profile.play_level}\n' \
-                       f'Cool down: {current_profile.cool_down}'
-            else:
-                text = f'Someone liked your profile (and more {count_users_liked_for_text})\n\n' \
-                       f'Age: {current_profile.age}\n' \
-                       f'Gender: {current_profile.gender}\n' \
-                       f'About: {current_profile.about_yourself}\n' \
-                       f'Играет в: {games}\n' \
-                       f'Level of play: {current_profile.play_level}\n' \
-                       f'Cool down: {current_profile.cool_down}'
+            text = _('Кому-то понравилась твоя анкета (и ещё {count_users_liked_for_text})\n\n'
+                     'Возраст: {current_profile.age}\n'
+                     'Пол: {current_profile.gender}\n'
+                     'О себе: {current_profile.about_yourself}\n'
+                     'Играет в: {games}\n'
+                     'Уровень игры: {current_profile.play_level}\n'
+                     'К/Д: {current_profile.cool_down}').format(current_profile=current_profile, games=games)
 
         # Если пользователь без фото
         if photo == 'None':
@@ -507,21 +382,12 @@ async def send_answer_message(message: types.Message, state: FSMContext):
 
     # Сюда попадаем, когда показали всех пользователей, которым понравилась анкета
     else:
-        if user_language == '🇷🇺 Русский':
-            await message.answer(f'Чтобы получать больше лайков ❤️\n'
-                                 f'Подпишись на канал Ссылка на канал✅',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Продолжить просмотр анкет')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
-        else:
-            await message.answer(f'To get more likes ❤️\n'
-                                 f'Subscribe to the channel Link ✅',
-                                 reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                     [
-                                         KeyboardButton(text='Continue viewing profiles')
-                                     ]
-                                 ], resize_keyboard=True, one_time_keyboard=True))
+        await message.answer(_('Чтобы получать больше лайков ❤️\n'
+                               'Подпишись на канал Ссылка на канал✅'),
+                             reply_markup=ReplyKeyboardMarkup(keyboard=[
+                                 [
+                                     KeyboardButton(text=_('Продолжить просмотр анкет'))
+                                 ]
+                             ], resize_keyboard=True, one_time_keyboard=True))
 
         await state.set_state('continue_viewing_profiles')

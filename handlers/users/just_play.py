@@ -4,8 +4,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from keyboards.inline.gaming_keyboards import show_gender_keyboard, \
     get_level_of_play_keyboard, show_correct_profile_keyboard, menu_my_profile_keyboard
-from keyboards.inline.gaming_keyboards import ru_button
-from loader import dp, db
+from loader import dp, db, _
 from utils.photo_link import photo_link
 from utils.db_api.models import User
 
@@ -20,17 +19,11 @@ async def purpose_search_handler(message: types.Message, state: FSMContext):
     # Если пользователь выбрал "Страны СНГ"
     if countries in ['Страны СНГ', 'CIS countries']:
         await state.update_data(country='Россия, Белоруссия, Украина')
-
-        if language == ru_button.text:
-            await message.answer('Ты парень или девушка?', reply_markup=show_gender_keyboard(language))
-        else:
-            await message.answer('Are you a guy or a girl?', reply_markup=show_gender_keyboard(language))
-
+        await message.answer(_('Ты парень или девушка?'), reply_markup=show_gender_keyboard())
         await state.set_state('gender_just_play')
 
     # Если пользователь выбрал "Все страны"
     elif countries in ['Все страны', 'All countries']:
-
         # Получаем список всех стран
         all_countries = await db.get_all_countries()
 
@@ -40,19 +33,12 @@ async def purpose_search_handler(message: types.Message, state: FSMContext):
             country_btn = KeyboardButton(text=f'{country[0]}')
             country_keyboard.add(country_btn)
 
-        if language == ru_button.text:
-            await message.answer('Выберите страну из списка', reply_markup=country_keyboard)
-        else:
-            await message.answer('Choose a country from the list', reply_markup=country_keyboard)
-
+        await message.answer(_('Выберите страну из списка'), reply_markup=country_keyboard)
         await state.set_state('country_just_play')
 
     # Если пользователь не выбрал из вариантов, а написал текст
     else:
-        if language == ru_button.text:
-            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
-        else:
-            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        await message.answer(_('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!'))
 
 
 # Получаем страну, которую пользователь выбрал из списка
@@ -64,19 +50,11 @@ async def get_country_just_play(message: types.Message, state: FSMContext):
     all_countries = await db.get_all_countries()
     country = message.text
     if country not in all_countries:
-        if language == ru_button.text:
-            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
-        else:
-            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        await message.answer(_('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!'))
         return
 
     await state.update_data(country=country)
-
-    if language == ru_button.text:
-        await message.answer('Ты парень или девушка?', reply_markup=show_gender_keyboard(language))
-    else:
-        await message.answer('Are you a guy or a girl?', reply_markup=show_gender_keyboard(language))
-
+    await message.answer(_('Ты парень или девушка?'), reply_markup=show_gender_keyboard())
     await state.set_state('gender_just_play')
 
 
@@ -88,19 +66,11 @@ async def get_level_of_play(message: types.Message, state: FSMContext):
 
     gender = message.text
     if gender not in ['Парень', 'Девушка', 'Guy', 'Girl']:
-        if language == ru_button.text:
-            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
-        else:
-            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        await message.answer(_('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!'))
         return
 
     await state.update_data(gender=gender)
-
-    if language == ru_button.text:
-        await message.answer('Ваш уровень игры?', reply_markup=get_level_of_play_keyboard(language))
-    else:
-        await message.answer('Your level of play?', reply_markup=get_level_of_play_keyboard(language))
-
+    await message.answer(_('Ваш уровень игры?'), reply_markup=get_level_of_play_keyboard())
     await state.set_state('level_of_play')
 
 
@@ -113,45 +83,26 @@ async def get_cool_down(message: types.Message, state: FSMContext):
     play_level = message.text
 
     if play_level not in ['Новичок', 'Средний', 'Высокий', 'Киберспорт', 'Beginner', 'Average', 'High', 'Cybersport']:
-        if language == ru_button.text:
-            await message.answer('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!')
-        else:
-            await message.answer('I do not know such an option, please click on one of the keyboard buttons!')
+        await message.answer(_('Не знаю такой вариант, просьба нажать на одну из кнопок клавиатуры!'))
         return
 
     await state.update_data(play_level=play_level)
-    if language == ru_button.text:
-        await message.answer('Ваше К/Д??')
-    else:
-        await message.answer('Your cool down?')
-
+    await message.answer(_('Ваше К/Д??'))
     await state.set_state('cool_down')
 
 
 # Узнаем у пользователя дополнительную информацию
 @dp.message_handler(state='cool_down')
 async def get_something_from_yourself(message: types.Message, state: FSMContext):
-    data = await state.get_data()
-    language = data.get('language')
-
     try:
         cool_down = float(message.text)
-
     # Если пользователь ввёл текст
     except ValueError:
-        if language == ru_button.text:
-            await message.answer('Введите число')
-        else:
-            await message.answer('Enter an integer')
+        await message.answer(_('Введите число'))
         return
 
     await state.update_data(cool_down=cool_down)
-
-    if language == ru_button.text:
-        await message.answer('Что-то от себя?')
-    else:
-        await message.answer('Something from yourself?')
-
+    await message.answer(_('Что-то от себя?'))
     await state.set_state('something_from_yourself')
 
 
@@ -163,20 +114,12 @@ async def get_photo(message: types.Message, state: FSMContext):
     about_yourself = message.text
     await state.update_data(about_yourself=about_yourself)
 
-    if language == ru_button.text:
-        await message.answer('Пришли любую фотографию (не файл), если хочешь!',
-                             reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                 [
-                                     KeyboardButton(text='Пропустить')
-                                 ]
-                             ], resize_keyboard=True, one_time_keyboard=True))
-    else:
-        await message.answer('Send any photo (not file) if you want!',
-                             reply_markup=ReplyKeyboardMarkup(keyboard=[
-                                 [
-                                     KeyboardButton(text='Skip')
-                                 ]
-                             ], resize_keyboard=True, one_time_keyboard=True))
+    await message.answer(_('Пришли любую фотографию (не файл), если хочешь!'),
+                         reply_markup=ReplyKeyboardMarkup(keyboard=[
+                             [
+                                 KeyboardButton(text=_('Пропустить'))
+                             ]
+                         ], resize_keyboard=True, one_time_keyboard=True))
 
     await state.set_state('photo_just_play')
 
@@ -203,35 +146,22 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
         # не меняется
         games = game1 + game2
 
-    text_ru = f'Вот твой профиль:\n\n' \
-              f'Возраст: <b>{age}</b>\n' \
-              f'Пол: <b>{gender}</b>\n' \
-              f'Цель: <b>{purpose}</b>\n' \
-              f'Страна поиска: <b>{country}</b>\n' \
-              f'О себе: <b>{about_yourself}</b>\n' \
-              f'В какие игры играю: <b>{games}</b>\n' \
-              f'Уровень игры: <b>{play_level}</b>\n' \
-              f'Ваш К/Д: <b>{cool_down}</b>\n\n' \
-              f'Все верно?'
-
-    text_en = f'Here is your profile:\n\n' \
-              f'Age: <b>{age}</b>\n' \
-              f'Gender: <b>{gender}</b>\n' \
-              f'Purpose: <b>{purpose}</b>\n' \
-              f'Country teammates: <b>{country}</b>\n' \
-              f'About yourself: <b>{about_yourself}</b>\n' \
-              f'Playing games: <b>{games}</b>\n' \
-              f'Level of play: <b>{play_level}</b>\n' \
-              f'Your cool down: <b>{cool_down}</b>\n\n' \
-              f'Is that right?'
+    text = _('Вот твой профиль:\n\n'
+             'Возраст: <b>{age}</b>\n'
+             'Пол: <b>{gender}</b>\n'
+             'Цель: <b>{purpose}</b>\n'
+             'Страна поиска: <b>{country}</b>\n'
+             'О себе: <b>{about_yourself}</b>\n'
+             'В какие игры играю: <b>{games}</b>\n'
+             'Уровень игры: <b>{play_level}</b>\n'
+             'Ваш К/Д: <b>{cool_down}</b>\n\n'
+             'Все верно?').format(age=age, gender=gender, purpose=purpose, country=country,
+                                  about_yourself=about_yourself, games=games, play_level=play_level,
+                                  cool_down=cool_down)
 
     # Если пользователь не стал отправлять фото, а нажал "Пропустить"
     if message.text in ['Пропустить', 'Skip']:
-        if language == '🇷🇺 Русский':
-            await message.answer(text=text_ru, reply_markup=show_correct_profile_keyboard(language))
-        else:
-            await message.answer(text=text_ru, reply_markup=show_correct_profile_keyboard(language))
-
+        await message.answer(text=text, reply_markup=show_correct_profile_keyboard())
     # Если пользователь отправил фото
     else:
         # Проверяем, что пользователь прислал фото, а не файл
@@ -239,19 +169,11 @@ async def add_profile_just_play(message: types.Message, state: FSMContext):
             photo = message.photo[-1]
             link = await photo_link(photo)
             await state.update_data(photo=link)
-
-            if language == '🇷🇺 Русский':
-                await message.answer_photo(photo=link, caption=text_ru,
-                                           reply_markup=show_correct_profile_keyboard(language))
-            else:
-                await message.answer_photo(photo=link, caption=text_en,
-                                           reply_markup=show_correct_profile_keyboard(language))
+            await message.answer_photo(photo=link, caption=text,
+                                       reply_markup=show_correct_profile_keyboard())
             await state.set_state('check_profile_just_play')
         except IndexError:
-            if language == '🇷🇺 Русский':
-                await message.answer('Пришлите фото, не файл!')
-            else:
-                await message.answer('Send a photo, not a file!')
+            await message.answer(_('Пришлите фото, не файл!'))
             return
 
 
@@ -293,41 +215,24 @@ async def correct_profile_just_play(message: types.Message, state: FSMContext):
         photo=str(photo)
     ).apply()
 
-    text_ru = f'Вот твой профиль:\n\n' \
-              f'Возраст: <b>{age}</b>\n' \
-              f'Пол: <b>{gender}</b>\n' \
-              f'Цель: <b>{purpose}</b>\n' \
-              f'Страна поиска: <b>{country}</b>\n' \
-              f'О себе: <b>{about_yourself}</b>\n' \
-              f'В какие игры играю: <b>{games}</b>\n' \
-              f'Уровень игры: <b>{play_level}</b>\n' \
-              f'Ваш К/Д: <b>{cool_down}</b>'
+    text = _('Вот твой профиль:\n\n'
+             'Возраст: <b>{age}</b>\n'
+             'Пол: <b>{gender}</b>\n'
+             'Цель: <b>{purpose}</b>\n'
+             'Страна поиска: <b>{country}</b>\n'
+             'О себе: <b>{about_yourself}</b>\n'
+             'В какие игры играю: <b>{games}</b>\n'
+             'Уровень игры: <b>{play_level}</b>\n'
+             'Ваш К/Д: <b>{cool_down}</b>').format(age=age, gender=gender, purpose=purpose, country=country,
+                                                   about_yourself=about_yourself, games=games, play_level=play_level,
+                                                   cool_down=cool_down)
 
-    text_en = f'Here is your profile:\n\n' \
-              f'Age: <b>{age}</b>\n' \
-              f'Gender: <b>{gender}</b>\n' \
-              f'Purpose: <b>{purpose}</b>\n' \
-              f'Country teammates: <b>{country}</b>\n' \
-              f'About yourself: <b>{about_yourself}</b>\n' \
-              f'Playing games: <b>{games}</b>\n' \
-              f'Level of play: <b>{play_level}</b>\n' \
-              f'Your cool down: <b>{cool_down}</b>'
-
-    if language == '🇷🇺 Русский':
-        await message.answer('Профиль успешно добавлен!')
-        await message.answer('Ваш профиль:')
-        await message.answer(text=text_ru)
-        await message.answer(text='1. Заполнить анкету заново\n'
-                                  '2. Изменить фото\n'
-                                  '3. Изменить текст анкеты\n'
-                                  '4. Смотреть анкеты', reply_markup=menu_my_profile_keyboard)
-    else:
-        await message.answer('Profile successfully added!')
-        await message.answer('Your profile:')
-        await message.answer(text=text_en)
-        await message.answer(text='1. Edit my profile\n'
-                                  '2. Change my photo\n'
-                                  '3. Change profile text\n'
-                                  '4. View profiles', reply_markup=menu_my_profile_keyboard)
+    await message.answer(_('Профиль успешно добавлен!'))
+    await message.answer(_('Ваш профиль:'))
+    await message.answer(text=text)
+    await message.answer(text=_('1. Заполнить анкету заново\n'
+                                '2. Изменить фото\n'
+                                '3. Изменить текст анкеты\n'
+                                '4. Смотреть анкеты'), reply_markup=menu_my_profile_keyboard)
 
     await state.set_state('my_profile_state')

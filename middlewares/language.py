@@ -13,6 +13,4 @@ async def get_user_locale(user_id: int):
 class LanguageMiddleware(I18nMiddleware):
     async def get_user_locale(self, action: str, args: Tuple[Any]) -> Optional[str]:
         user = types.User.get_current()
-        await get_user_locale(user.id)
-        return 'en'
-
+        return await get_user_locale(user.id) or user.locale
